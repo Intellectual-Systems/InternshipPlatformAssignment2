@@ -3,17 +3,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-<<<<<<< HEAD
-from App.models.employer import Employer
-from App.models import User, Student, Staff
-=======
 from App.models import User
 from App.models.employer import Employer
 from App.models.staff import Staff
 from App.models.student import Student
 from App.models.student import Student_Position
 from App.models.internshipposition import InternshipPosition
->>>>>>> 94465e1e5f7eb6895ce70d3343886bfbbc1b34ad
 from App.controllers import (
     create_user,
     get_all_users_json,
@@ -23,8 +18,18 @@ from App.controllers import (
     update_user
 )
 
-
 LOGGER = logging.getLogger(__name__)
+
+# This fixture creates an empty database for the test and deletes it after the test
+# scope="class" would execute the fixture once and resued for all methods in the class
+@pytest.fixture(autouse=True, scope="function")
+def empty_db():
+    app = create_app({'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
+    with app.app_context():
+        create_db()
+        yield app.test_client()
+        db.session.remove()
+        db.drop_all()
 
 '''
    Unit Tests
@@ -91,7 +96,7 @@ class StaffUnitTests(unittest.TestCase):
         # assert staff.username == "staff1"
     
     def test_enroll_student(self):
-        emp = Employer("emp2", "emp2pass", "TechCorp")
+        emp = Employer("emp3", "emp3pass", "TechCorp")
         db.session.add(emp)
         db.session.commit()
 
@@ -144,16 +149,6 @@ class TestEmployerUnit(unittest.TestCase):
     Integration Tests
 '''
 
-# This fixture creates an empty database for the test and deletes it after the test
-# scope="class" would execute the fixture once and resued for all methods in the class
-@pytest.fixture(autouse=True, scope="module")
-def empty_db():
-    app = create_app({'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
-    with app.app_context():
-        create_db()
-        yield app.test_client()
-        db.drop_all()
-
 def test_authenticate():
     user = create_user("bob", "bobpass")
     assert login("bob", "bobpass") != None
@@ -174,15 +169,5 @@ class UsersIntegrationTests(unittest.TestCase):
         user = get_user(1)
         assert user.username == "ronnie"
         
-<<<<<<< HEAD
-        
 if __name__ == "__main__":
     unittest.main()
-
-=======
-    def test_create_employer(self):
-        from App.models.employer import Employer
-        employer = Employer("employer1", "emppass", "TechCorp")
-        self.assertEqual(employer.companyName, employer.password, "TechCorp")
->>>>>>> 94465e1e5f7eb6895ce70d3343886bfbbc1b34ad
-
