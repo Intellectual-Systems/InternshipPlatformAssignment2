@@ -595,27 +595,6 @@
 			"response": []
 		},
 		{
-			"name": "List Staff",
-			"id": "42549608-2c776d2d-643f-4ce1-a1e2-c04ebd7e09de",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list-std",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list-std"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "List Shortlists",
 			"id": "42549608-7367830e-f450-4097-9f11-fbe49f1c28af",
 			"protocolProfileBehavior": {
