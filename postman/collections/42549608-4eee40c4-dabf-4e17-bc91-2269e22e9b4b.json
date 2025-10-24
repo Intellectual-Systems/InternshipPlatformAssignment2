@@ -599,6 +599,40 @@
 		},
 		{
 			"name": "Create Position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db429e79-eb1c-4c3a-915f-44f473e39ef0",
+						"exec": [
+							"let { employerID, positionTitle, department, description} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"pm.collectionVariables.set(\"positionTitle\", positionTitle);\r",
+							"pm.collectionVariables.set(\"department\", department);\r",
+							"pm.collectionVariables.set(\"description\", description);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Position ${positionTitle} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-04ce0b74-f526-448a-b8f1-4e4f1ca5200f",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
