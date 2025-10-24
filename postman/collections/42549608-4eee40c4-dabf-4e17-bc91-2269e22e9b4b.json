@@ -409,6 +409,73 @@
 		},
 		{
 			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3813f70-7234-4083-bec8-5d20fbd3a1c8",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employers\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\" : {\r",
+							"                \"type\" : \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"companyName\": { \"type\": \"string\" },\r",
+							"                    \"id\": { \"type\": \"number\" },\r",
+							"                    \"username\": { \"type\": \"string\" }\r",
+							"                }\r",
+							"            }\r",
+							"        },\r",
+							"        \"staff\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"employerID\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                },\r",
+							"            }\r",
+							"        },\r",
+							"        \"students\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"degree\": { \"type\": \"string\" },\r",
+							"                    \"department\": { \"type\": \"string\" },\r",
+							"                    \"faculty\": { \"type\": \"string\" },\r",
+							"                    \"gpa\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                },\r",
+							"            }\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [ \"employers\", \"staff\", \"students\" ]\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Users should have an employers, staff and students with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-3220968a-8a9a-4783-bb60-383d13cf105c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -417,7 +484,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "{{host}} /list",
+					"host": [
+						"{{host}} "
+					],
+					"path": [
+						"list"
+					]
 				}
 			},
 			"response": []
