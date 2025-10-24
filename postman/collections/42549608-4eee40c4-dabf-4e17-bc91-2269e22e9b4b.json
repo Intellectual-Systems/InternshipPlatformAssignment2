@@ -445,7 +445,7 @@
 							"\r",
 							"\r",
 							"pm.test(\r",
-							"    `User should have an id and username with the appropriate values`, \r",
+							"    `User should have an companyName, id and username with the appropriate values`, \r",
 							"    function() {\r",
 							"        var jsonData = pm.response.json();\r",
 							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
