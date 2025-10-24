@@ -465,5 +465,11 @@ test = AppGroup('test', help='Testing commands')
 def user_tests_command(type):
     sys.exit(pytest.main(["-k", "UserUnitTests"]))
     
+def employer_tests_command(type):
+    if Employer == None:
+        print("Employer is successfully created with the appropriate attributes")
+    else:
+        print("Employer creation failed")
+        return; 
 
 app.cli.add_command(test)

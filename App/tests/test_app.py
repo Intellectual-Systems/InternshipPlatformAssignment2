@@ -3,7 +3,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-from App.models import User
+from App.models.employer import Employer
+from App.models import User, Student, Staff
 from App.controllers import (
     create_user,
     get_all_users_json,
@@ -42,6 +43,23 @@ class UserUnitTests(unittest.TestCase):
         user = User("bob", password)
         assert user.check_password(password)
 
+class TestEmployerUnit(unittest.TestCase):
+    
+    def test_new_employer(self):
+        employer = Employer("bob_emp", "bobpass", "Bob's Company")
+        assert employer.username == "bob_emp"
+        assert employer.companyName == "Bob's Company"
+
+    def test_employer_password_hashed(self):
+        password = "mypass"
+        employer = Employer("rick_emp", password, "Rick's Corp")
+        assert employer.password != password
+
+    def test_employer_check_password(self):
+        password = "mypass"
+        employer = Employer("rick_emp", password, "Rick's Corp")
+        assert employer.check_password(password)
+
 '''
     Integration Tests
 '''
@@ -51,10 +69,10 @@ class UserUnitTests(unittest.TestCase):
 @pytest.fixture(autouse=True, scope="module")
 def empty_db():
     app = create_app({'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
-    create_db()
-    yield app.test_client()
-    db.drop_all()
-
+    with app.app_context():
+        create_db()
+        yield app.test_client()
+        db.drop_all()
 
 def test_authenticate():
     user = create_user("bob", "bobpass")
@@ -76,8 +94,8 @@ class UsersIntegrationTests(unittest.TestCase):
         user = get_user(1)
         assert user.username == "ronnie"
         
-    def test_create_employer(self):
-        from App.models.employer import Employer
-        employer = Employer("employer1", "emppass", "TechCorp")
-        self.assertEqual(employer.companyName, employer.password "TechCorp")
+        
+if __name__ == "__main__":
+    unittest.main()
+
 
