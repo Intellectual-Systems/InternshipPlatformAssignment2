@@ -901,6 +901,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "View Position Shortlist",
+			"id": "42549608-09dacd0f-cc64-4e72-a2b1-be4ca020e3e1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"variable": [
