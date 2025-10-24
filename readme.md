@@ -1,5 +1,22 @@
 <div align=justify>
 
+# Development Notes
+
+## Recent Changes
+
+- Added POST routes for creating sample entries for each table
+
+- Changes can be found in views/user.py
+
+## Next Tasks
+
+- Implement all necessary routes
+
+- Authorisation
+    - Distinguish user vs admin view
+
+- Integration Tests
+
 # Notes
 
 - Sample data for each table has been created. Use command 'flask list' to list data for all tables

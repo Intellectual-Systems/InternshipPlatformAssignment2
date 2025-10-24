@@ -13,6 +13,13 @@ class Employer(User):
         self.set_password(password)
         self.companyName = companyName
     
+    def get_json(self):
+        return{
+            'id': self.id,
+            'username': self.username,
+            'companyName': self.companyName
+        }
+
     def __repr__(self):
         return f"Employer[id= {self.id}, username= {self.username}, companyName= {self.companyName}]"
 
