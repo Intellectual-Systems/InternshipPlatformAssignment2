@@ -4,16 +4,13 @@
 
 ## Recent Changes
 
-- Added all routes that there are CLI commands for. Check views/user.py for changes
+- Added jwt_required() to all routes to restrict them to authorised users only
+
+- Changes can be found in views/user.py
 
 ## Next Tasks
 
-- Implement all necessary routes
-
-- Authorisation
-    - Distinguish user vs admin view
-
-- Integration Tests
+- Complete tests
 
 # Notes
 
