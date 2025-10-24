@@ -562,7 +562,7 @@
 							"\r",
 							"\r",
 							"pm.test(\r",
-							"    `User should have an employerID, id and username with the appropriate values`, \r",
+							"    `Staff should have an employerID, id and username with the appropriate values`, \r",
 							"    function() {\r",
 							"        var jsonData = pm.response.json();\r",
 							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
