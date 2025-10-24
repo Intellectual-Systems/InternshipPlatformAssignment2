@@ -189,7 +189,7 @@ def create_student_action():
     data = request.json
     stu = create_student(data['username'], data['password'], data['faculty'], data['department'], data['degree'], data['gpa'])
     
-    return jsonify({'message': f"Student {stu.username} created with id {stu.id}"}), 201
+    return jsonify({'message': f"Student {stu.username} created"}), 201
 
 # Enrolls a student by creates a shortlist(student_position) entry using the specified attributes which includes staff id, position id and student id
 
