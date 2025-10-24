@@ -456,7 +456,7 @@
 							"                    \"id\":{\"type\":\"number\"},\r",
 							"                    \"username\":{\"type\":\"string\"}\r",
 							"                },\r",
-							"                \"required\" : [\"degree\", \"department\", \"faculty\", \"gpa\", \"id\", \"username\"],\r",
+							"                \r",
 							"            }\r",
 							"        }\r",
 							"    },\r",
