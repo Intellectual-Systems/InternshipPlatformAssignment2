@@ -367,7 +367,7 @@
 					"script": {
 						"id": "65795fba-f4f0-4fec-8522-27aaaa92b64f",
 						"exec": [
-							"ar schema = {\r",
+							"var schema = {\r",
 							"  \"type\": \"array\",\r",
 							"  \"items\": {\r",
 							"    \"type\": \"object\",\r",
