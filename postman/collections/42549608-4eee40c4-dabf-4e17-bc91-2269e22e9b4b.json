@@ -68,6 +68,18 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Create Employer",
+			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
