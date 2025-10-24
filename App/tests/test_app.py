@@ -32,9 +32,9 @@ def empty_db():
         db.drop_all()
 
 '''
-   Unit Tests
+   Integration Tests
 '''
-class UserUnitTests(unittest.TestCase):
+class UserIntegrationTests(unittest.TestCase):
 
     def test_new_user(self):
         user = User("bob", "bobpass")
@@ -146,7 +146,7 @@ class TestEmployerIntegration(unittest.TestCase):
         assert employer.check_password(password)
 
 '''
-    Integration Tests
+    Unit Tests
 '''
 
 def test_authenticate():
@@ -200,17 +200,17 @@ class EmployerUnityTests(unittest.TestCase):
 class StaffUnitTests(unittest.TestCase):
     
     def test_new_staff(self):
-        staff = Staff(staff1, staff1pass, employer_id=1)
+        staff = Staff("staff1", "staff1pass", 1)
         assert staff.username == "staff1"
         assert staff.employerID == 1
-
+    
     def test_staff_inherits_from_user(self):
-        staff = Staff(staff1, staff1pass, employer_id=1)
+        staff = Staff("staff1", "staff1pass", 1)
         assert isinstance(staff, User)
-
+    
     def test_staff_password_hashed(self):
         password = "mypass"
-        staff = Staff("staff1", password, employer_id=1)
+        staff = Staff("staff1", password, 1)
         assert staff.password != password
 
 class StudentUnitTests(unittest.TestCase):
