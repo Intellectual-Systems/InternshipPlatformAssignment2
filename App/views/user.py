@@ -103,18 +103,15 @@ def create_employer_action():
     data = request.json
     emp = create_employer(data['username'], data['password'], data['companyName'])
     
-    return jsonify({'message': f"Employer {emp.username} created with id {emp.id}"}), 201
+    return jsonify({'message': f"Employer {emp.username} created"}), 201
 
 # Creates a position using the specified attributes which includes the employer's id
 
 @user_views.route('/create-pos', methods=['POST'])
 def create_position_action():
     data = request.json
-    emp = db.session.query(Employer).filter_by(id=data['employerID']).first()
-    pos = emp.createPosition(data['positionTitle'], data['department'], data['description'])
-    db.session.add(emp)
-    db.session.commit()
-    return jsonify({'message': f"Position {pos.positionTitle} created with id {pos.id}"}), 201
+    pos = create_position(data['employerID'], data['positionTitle'], data['department'], data['description'])
+    return jsonify({'message': f"Position {pos.positionTitle} created"}), 201
 
 # Creates a staff using the specified attributes which includes the employer's id
 
