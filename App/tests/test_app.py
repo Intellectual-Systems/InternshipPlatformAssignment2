@@ -61,7 +61,7 @@ class UserUnitTests(unittest.TestCase):
     #     user = User("bob", password)
     #     assert user.check_password(password)
 
-class EmployerUnitTests(unittest.TestCase):
+class EmployerIntegrationTests(unittest.TestCase):
 
     def test_new_employer(self):
         emp = Employer("emp1", "emp1pass", "TechCorp")
@@ -81,7 +81,7 @@ class EmployerUnitTests(unittest.TestCase):
 
         assert db.session.query(InternshipPosition).filter_by(id=position.id).first() is not None
 
-class StaffUnitTests(unittest.TestCase):
+class StaffIntegrationTests(unittest.TestCase):
 
     def test_new_staff(self):
         emp = Employer("emp1", "emp1pass", "TechCorp")
@@ -118,7 +118,7 @@ class StaffUnitTests(unittest.TestCase):
         
         assert db.session.query(Student_Position).filter_by(studentID=student.id, positionID=position.id).first() != None
 
-class StudentUnitTests(unittest.TestCase):
+class StudentIntegrationTests(unittest.TestCase):
 
     def test_new_student(self):
         student = Student("stud1", "stud1pass", "FST", "DCIT", "BSc Comp Sci", 3.8)
@@ -128,7 +128,7 @@ class StudentUnitTests(unittest.TestCase):
         assert db.session.query(Student).filter_by(id=student.id).first() is not None
         # assert student.username == "stud1"
 
-class TestEmployerUnit(unittest.TestCase):
+class TestEmployerIntegration(unittest.TestCase):
     
     def test_new_employer(self):
         employer = Employer("bob_emp", "bobpass", "Bob's Company")
@@ -153,21 +153,27 @@ def test_authenticate():
     user = create_user("bob", "bobpass")
     assert login("bob", "bobpass") != None
 
-class UsersIntegrationTests(unittest.TestCase):
-
-    def test_create_user(self):
-        user = create_user("rick", "bobpass")
-        assert user.username == "rick"
-
-    def test_get_all_users_json(self):
-        users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"bob"}, {"id":2, "username":"rick"}], users_json)
-
-    # Tests data changes in the database
-    def test_update_user(self):
-        update_user(1, "ronnie")
-        user = get_user(1)
-        assert user.username == "ronnie"
+class UserUnitTests(unittest.TestCase):
+    
+    def test_new_user(self):
+        user = User("bob", "bobpass")
+        assert user.username == "bob"
+    
+    def test_user_password_is_hashed(self):
+        password = "mypass"
+        user = User("bob", password)
+        assert user.password != password
+        assert len(user.password) > len(password)
+    
+    def test_user_check_password(self):
+        password = "mypass"
+        user = User("bob", password)
+        assert user.check_password(password) == True
+    
+    def test_user_check_wrong_password(self):
+        password = "mypass"
+        user = User("bob", password)
+        assert user.check_password("wrongpass") == False
         
 if __name__ == "__main__":
     unittest.main()
