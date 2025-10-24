@@ -909,6 +909,43 @@
 		},
 		{
 			"name": "List Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d02aa937-9309-42e7-8f42-dd510e0bc314",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"degree\": { \"type\": \"string\" },\r",
+							"        \"department\": { \"type\": \"string\" },\r",
+							"        \"faculty\": { \"type\": \"string\" },\r",
+							"        \"gpa\": { \"type\": \"number\" },\r",
+							"        \"id\": { \"type\": \"number\" },\r",
+							"        \"username\": { \"type\": \"string\" }\r",
+							"    },\r",
+							"      \"required\": [\"degree\", \"department\", \"faculty\", \"gpa\", \"id\", \"username\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Student should have a degree, department, faculty, gpa, ID and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-faca7625-9eb3-40a5-93c7-0e67f4e679c7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -917,7 +954,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "/list-std",
+					"raw": "{{host}}/list-std",
+					"host": [
+						"{{host}}"
+					],
 					"path": [
 						"list-std"
 					]
