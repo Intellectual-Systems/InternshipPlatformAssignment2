@@ -120,7 +120,7 @@ def create_staff_action():
     data = request.json
     sta = create_staff(data['username'], data['password'], data['employerID'])
     
-    return jsonify({'message': f"Staff {sta.username} created with id {sta.id}"}), 201
+    return jsonify({'message': f"Staff {sta.username} created"}), 201
 
 # Creates a student using the specified attributes
 
