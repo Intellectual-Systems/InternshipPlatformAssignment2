@@ -223,6 +223,136 @@
 			]
 		},
 		{
+			"name": "Login - Success Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dd6f25f-fb2a-435c-ba86-801dfb356ba4",
+						"exec": [
+							"pm.test(\"Returned Access Token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set('access_token', jsonData['access_token']) ",
+							"});",
+							"",
+							"",
+							"   "
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "42d33f6e-f97c-4214-ace3-a0291b1f827c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "42549608-beea6f26-44e9-48b7-99ab-aa01534ac4e5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"{{username}}\",\r\n\t\"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "Allows a user to login and recieve their token"
+			},
+			"response": [
+				{
+					"id": "42549608-c97a583c-1cc6-4534-a016-8eb36964ac4c",
+					"name": "Login - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"{{username}}\",\r\n\t\"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "309"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Mar 2024 00:39:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.8.16"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQyNjM1OCwianRpIjoiYzE4ODBjNjEtYjg4Ny00Mzk3LWE4YTQtNzk5M2U1MjU4MjdmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ikplbm5pbmdzLkdvb2R3aW4iLCJuYmYiOjE3MDk0MjYzNTgsImV4cCI6MTcwOTQ4MDM1OH0.I7MDJf8BRwuvzCX0O8rDEocJXsv7yHx3E8BNwUw8PYw\"\n}"
+				}
+			]
+		},
+		{
 			"name": "Login",
 			"id": "42549608-41077fe7-6a94-406b-95a4-ab353e6ffd00",
 			"protocolProfileBehavior": {
