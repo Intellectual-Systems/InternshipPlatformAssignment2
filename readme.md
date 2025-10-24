@@ -4,13 +4,11 @@
 
 ## Recent Changes
 
-- Added basic routes for listing each table in json
+- Added a scenario route that adds one entry for each table and returns the json for all added entries. THis will be used for testing in Postman
 
-- Added get_json() functions for each model for returning data for routes
+- Changed code in controllers/scenario.py to use controllers instead of models (Eg Uses create_employer instead of Employer(username, password, comppanyName))
 
-- All changes can be found in views/user.py and the models folder
-
-- These routes were tested with postman and do work. However, these are just simple get requests. Implementing tests on postman's end still needs to be implemented
+- Changes can be found in views/user.py and controllers/scenario.py
 
 ## Next Tasks
 
