@@ -76,4 +76,8 @@ class UsersIntegrationTests(unittest.TestCase):
         user = get_user(1)
         assert user.username == "ronnie"
         
+    def test_create_employer(self):
+        from App.models.employer import Employer
+        employer = Employer("employer1", "emppass", "TechCorp")
+        self.assertEqual(employer.companyName, employer.password "TechCorp")
 
