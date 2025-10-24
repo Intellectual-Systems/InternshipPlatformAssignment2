@@ -174,6 +174,44 @@ class UserUnitTests(unittest.TestCase):
         password = "mypass"
         user = User("bob", password)
         assert user.check_password("wrongpass") == False
+
+class EmployerUnityTests(unittest.TestCase):
+    
+    def test_new_employer(self):
+        employer = Employer("bob_emp", "bobpass", "Bob's Company")
+        assert employer.username == "bob_emp"
+        assert employer.companyName == "Bob's Company"
+
+    def test_employer_password_hashed(self):
+        password = "mypass"
+        employer = Employer("rick_emp", password, "Rick's Corp")
+        assert employer.password != password
+        assert len(employer.password) > len(password)
+
+    def test_employer_check_password(self):
+        password = "mypass"
+        employer = Employer("rick_emp", password, "Rick's Corp")
+        assert employer.check_password(password) == True
+
+    def test_employer_inherits_from_user(self):
+        employer = Employer("test_emp", "testpass", "TestCorp")
+        assert isinstance(employer, User)
         
+class StaffUnitTests(unittest.TestCase):
+    
+    def test_new_staff(self):
+        staff = Staff(staff1, staff1pass, employer_id=1)
+        assert staff.username == "staff1"
+        assert staff.employerID == 1
+
+    def test_staff_inherits_from_user(self):
+        staff = Staff(staff1, staff1pass, employer_id=1)
+        assert isinstance(staff, User)
+
+    def test_staff_password_hashed(self):
+        password = "mypass"
+        staff = Staff("staff1", password, employer_id=1)
+        assert staff.password != password
+
 if __name__ == "__main__":
     unittest.main()
