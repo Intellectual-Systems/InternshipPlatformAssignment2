@@ -458,7 +458,7 @@
 							"            }\r",
 							"        }\r",
 							"    },\r",
-							"    \"required\": [  ]\r",
+							"    \"required\": [ \"employers\", \"staff\", \"students\" ],\r",
 							"    }\r",
 							"};\r",
 							"\r",
