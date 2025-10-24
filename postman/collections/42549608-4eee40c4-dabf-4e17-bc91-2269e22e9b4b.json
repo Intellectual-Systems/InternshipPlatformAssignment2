@@ -947,6 +947,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "Accept/Reject Student",
+			"id": "42549608-5eaafa8c-834a-458e-9dad-210775c476f1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"variable": [
