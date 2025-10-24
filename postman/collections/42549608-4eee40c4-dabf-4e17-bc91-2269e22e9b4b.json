@@ -507,6 +507,18 @@
 			"response": []
 		},
 		{
+			"name": "Create Employer",
+			"id": "42549608-791c7890-95fc-4985-b4cd-1663e7564e69",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "List Employers",
 			"event": [
 				{
@@ -558,6 +570,18 @@
 						"list-emp"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Position",
+			"id": "42549608-04ce0b74-f526-448a-b8f1-4e4f1ca5200f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": []
 			},
 			"response": []
 		},
@@ -742,30 +766,6 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Create Employer",
-			"id": "42549608-791c7890-95fc-4985-b4cd-1663e7564e69",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Create Position",
-			"id": "42549608-04ce0b74-f526-448a-b8f1-4e4f1ca5200f",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
 				"header": []
 			},
 			"response": []
