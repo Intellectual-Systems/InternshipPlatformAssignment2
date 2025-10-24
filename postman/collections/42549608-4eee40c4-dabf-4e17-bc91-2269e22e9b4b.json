@@ -428,7 +428,8 @@
 							"                    \"companyName\": { \"type\": \"string\" },\r",
 							"                    \"id\": { \"type\": \"number\" },\r",
 							"                    \"username\": { \"type\": \"string\" }\r",
-							"                }\r",
+							"                },\r",
+							"            \r",
 							"            }\r",
 							"        },\r",
 							"        \"staff\": {\r",
@@ -457,7 +458,7 @@
 							"            }\r",
 							"        }\r",
 							"    },\r",
-							"    \"required\": [ \"staff\" ]\r",
+							"    \"required\": [  ]\r",
 							"    }\r",
 							"};\r",
 							"\r",
@@ -473,6 +474,13 @@
 						"type": "text/javascript",
 						"packages": {},
 						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
 					}
 				}
 			],
