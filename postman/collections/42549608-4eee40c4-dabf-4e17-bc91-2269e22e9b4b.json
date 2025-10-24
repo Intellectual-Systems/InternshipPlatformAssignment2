@@ -612,7 +612,7 @@
 							"        \"status\": { \"type\": \"string\" },\r",
 							"        \"studentID\": { \"type\": \"number\" }\r",
 							"    },\r",
-							"    \"required\": [ \"employerID\", \"id\", \"username\"]\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"]\r",
 							"  }\r",
 							"};\r",
 							"\r",
