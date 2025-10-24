@@ -454,7 +454,7 @@
 							"                    \"gpa\": { \"type\": \"number\" },\r",
 							"                    \"id\":{\"type\":\"number\"},\r",
 							"                    \"username\":{\"type\":\"string\"}\r",
-							"                },\r",
+							"                }\r",
 							"            }\r",
 							"        }\r",
 							"    },\r",
@@ -479,8 +479,13 @@
 				{
 					"listen": "prerequest",
 					"script": {
+						"id": "221b6bb6-6a38-4051-ba71-abe3bf0b4d89",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
 						"packages": {},
-						"type": "text/javascript"
+						"requests": {}
 					}
 				}
 			],
