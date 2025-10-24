@@ -4,7 +4,7 @@
 
 ## Recent Changes
 
-- Removed unecessary code from views/user.py (was using db.session.add and commit even though controllers handled that)
+- Fixed minor problem in views/user.py
 
 ## Next Tasks
 
