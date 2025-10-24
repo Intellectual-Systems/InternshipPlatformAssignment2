@@ -596,6 +596,41 @@
 		},
 		{
 			"name": "List Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "511e762f-4db6-49c5-ba95-d8cd8ff91cdd",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"number\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"number\" }\r",
+							"    },\r",
+							"    \"required\": [ \"employerID\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Staff should have employer_response, positionID, status and studentID with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-7367830e-f450-4097-9f11-fbe49f1c28af",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
