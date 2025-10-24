@@ -745,6 +745,54 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "Create Employer",
+			"id": "42549608-791c7890-95fc-4985-b4cd-1663e7564e69",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create Position",
+			"id": "42549608-04ce0b74-f526-448a-b8f1-4e4f1ca5200f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff",
+			"id": "42549608-2928bbb3-efa5-45d0-aa30-60f0bcd4b99a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
