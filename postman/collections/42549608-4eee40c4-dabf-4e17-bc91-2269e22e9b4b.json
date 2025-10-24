@@ -361,39 +361,6 @@
 		},
 		{
 			"name": "Get users",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "65795fba-f4f0-4fec-8522-27aaaa92b64f",
-						"exec": [
-							"var schema = {\r",
-							"  \"type\": \"array\",\r",
-							"  \"items\": {\r",
-							"    \"type\": \"object\",\r",
-							"    \"properties\": {\r",
-							"\t\t\"id\":{\"type\":\"number\"},\r",
-							"        \"username\":{\"type\":\"string\"}\r",
-							"    },\r",
-							"    \"required\": [ \"id\", \"username\"]\r",
-							"  }\r",
-							"};\r",
-							"\r",
-							"\r",
-							"pm.test(\r",
-							"    `User should have an id and username with the appropriate values`, \r",
-							"    function() {\r",
-							"        var jsonData = pm.response.json();\r",
-							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
-							"    }\r",
-							");"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
 			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -402,7 +369,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "{{host}}/list",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list"
+					]
 				}
 			},
 			"response": []
@@ -514,7 +487,16 @@
 			},
 			"request": {
 				"method": "POST",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"dick\",\r\n    \"password\" : \"dickpass\",\r\n    \"companyName\" : \"DickCorp\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				}
 			},
 			"response": []
 		},
@@ -581,7 +563,25 @@
 			},
 			"request": {
 				"method": "POST",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employerID\" : 13,\r\n    \"positionTitle\" : \"IT Intern\",\r\n    \"department\" : \"IT\",\r\n    \"description\" : \"Address technical issues\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-pos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-pos"
+					]
+				}
 			},
 			"response": []
 		},
@@ -649,13 +649,31 @@
 		},
 		{
 			"name": "Create Staff",
-			"id": "42549608-2928bbb3-efa5-45d0-aa30-60f0bcd4b99a",
+			"id": "42549608-96386822-43d8-427d-9239-31adaf36da99",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "POST",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"duck\",\r\n    \"password\" : \"duckpass\",\r\n    \"employerID\" : 13\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-sta",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-sta"
+					]
+				}
 			},
 			"response": []
 		},
@@ -715,14 +733,32 @@
 			"response": []
 		},
 		{
-			"name": "Create Student",
+			"name": "Create Students",
 			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "POST",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"jack\",\r\n    \"password\" : \"jackpass\",\r\n    \"faculty\" : \"FST\",\r\n    \"department\" : \"DCIT\",\r\n    \"degree\" : \"BSc. Computer Science Major\",\r\n    \"gpa\" : 3.9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-std",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-std"
+					]
+				}
 			},
 			"response": []
 		},
@@ -783,28 +819,48 @@
 			"response": []
 		},
 		{
-			"name": "Scenario",
-			"id": "42549608-5ee133ca-e37e-450f-bd77-bcf655138901",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Enroll",
+			"name": "Enroll Student",
 			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"staffID\" : 14,\r\n    \"studentID\" : 15,\r\n    \"positionID\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/enroll",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"enroll"
+					]
+				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
 		}
 	]
 }
