@@ -56,14 +56,13 @@ def list_users():
     employers = get_all_employers()
     students = get_all_students()
     staff = get_all_staff()
-    positions = InternshipPosition.query.all()
     users = {
-        'employers': employers,
-        'students': students,
-        'staff': staff,
-        'positions': positions
+        'employers': [emp.get_json() for emp in employers],
+        'staff': [sta.get_json() for sta in staff],
+        'students': [stu.get_json() for stu in students]
     }
     return jsonify(users)
+    
 
 # Basic routes for listing data
 
