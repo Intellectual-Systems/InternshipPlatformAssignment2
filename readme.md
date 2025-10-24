@@ -4,11 +4,9 @@
 
 ## Recent Changes
 
-- Added a scenario route that adds one entry for each table and returns the json for all added entries. THis will be used for testing in Postman
+- Added POST routes for creating sample entries for each table
 
-- Changed code in controllers/scenario.py to use controllers instead of models (Eg Uses create_employer instead of Employer(username, password, comppanyName))
-
-- Changes can be found in views/user.py and controllers/scenario.py
+- Changes can be found in views/user.py
 
 ## Next Tasks
 
