@@ -197,5 +197,21 @@ class EmployerUnityTests(unittest.TestCase):
         employer = Employer("test_emp", "testpass", "TestCorp")
         assert isinstance(employer, User)
         
+class StaffUnitTests(unittest.TestCase):
+    
+    def test_new_staff(self):
+        staff = Staff(staff1, staff1pass, employer_id=1)
+        assert staff.username == "staff1"
+        assert staff.employerID == 1
+
+    def test_staff_inherits_from_user(self):
+        staff = Staff(staff1, staff1pass, employer_id=1)
+        assert isinstance(staff, User)
+
+    def test_staff_password_hashed(self):
+        password = "mypass"
+        staff = Staff("staff1", password, employer_id=1)
+        assert staff.password != password
+
 if __name__ == "__main__":
     unittest.main()
