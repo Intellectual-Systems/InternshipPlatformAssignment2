@@ -424,6 +424,40 @@
 		},
 		{
 			"name": "List Employers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce8dab7e-5b2e-4218-be5f-a75088e60a04",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"companyName\":{\"type\":\"string\"},\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"companyName\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `User should have an id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-56d92c61-e5f6-48ac-98d0-f0229bd3dbb8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
