@@ -853,6 +853,14 @@
 		{
 			"key": "access_token",
 			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
 		}
 	]
 }
