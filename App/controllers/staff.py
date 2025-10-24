@@ -1,5 +1,7 @@
 from App.models.staff import Staff
 from App.models.student import Student_Position
+from App.models.internshipposition import InternshipPosition
+from App.models.student import Student
 from App.database import db
 
 def create_staff(username, password, employerID):
