@@ -967,6 +967,43 @@
 		},
 		{
 			"name": "Enroll Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca830136-b025-43b8-b7ef-91e1089bc890",
+						"exec": [
+							"let { staffID, studentID, positionID} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"staffID\", staffID);\r",
+							"pm.collectionVariables.set(\"studentID\", studentID);\r",
+							"pm.collectionVariables.set(\"positionID\", positionID);\r",
+							"\r",
+							"// \"staffID\" : 14,\r",
+							"//     \"studentID\" : 15,\r",
+							"//     \"positionID\" : 4\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with student <studentID> shorlisted for position <positionID> by staff <staffID> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${studentID} shortlisted for position ${positionID} by staff ${staffID} successfully`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1143,6 +1180,18 @@
 		},
 		{
 			"key": "gpa",
+			"value": ""
+		},
+		{
+			"key": "staffID",
+			"value": ""
+		},
+		{
+			"key": "studentID",
+			"value": ""
+		},
+		{
+			"key": "positionID",
 			"value": ""
 		}
 	]
