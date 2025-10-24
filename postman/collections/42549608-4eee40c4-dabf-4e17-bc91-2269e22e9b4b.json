@@ -961,7 +961,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "View Student Shortlists",
 			"id": "42549608-d33a1185-5310-44e6-8b6a-e3829a08a1e2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
