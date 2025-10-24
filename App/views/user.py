@@ -9,6 +9,18 @@ from App.controllers import (
     get_all_users_json,
     jwt_required
 )
+from App.controllers.employer import *
+from App.controllers.student import *
+from App.controllers.staff import *
+from App.controllers.internshipposition import *
+from App.controllers.student import *
+
+from App.models.employer import Employer
+from App.models.staff import Staff
+from App.models.student import Student
+from App.models.internshipposition import InternshipPosition
+from App.models.student import Student_Position
+
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
@@ -38,3 +50,17 @@ def create_user_endpoint():
 @user_views.route('/static/users', methods=['GET'])
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
+
+@user_views.route('/list', methods=['GET'])
+def list_users():
+    employers = get_all_employers()
+    students = get_all_students()
+    staff = get_all_staff()
+    positions = InternshipPosition.query.all()
+    users = {
+        'employers': employers,
+        'students': students,
+        'staff': staff,
+        'positions': positions
+    }
+    return jsonify(users)
