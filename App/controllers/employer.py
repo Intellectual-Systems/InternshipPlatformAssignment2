@@ -44,3 +44,15 @@ def acceptReject(self, studentID, positionID, status, message=None):
     if sp:
         sp.status = status
         sp.employer_response = message
+
+        # Automatically reject every other student who was shortlisted for this position
+        if status.lower() == 'accepted':
+            otherStudents = Student_Position.query.filter_by(positionID=positionID).all()
+            for os in otherStudents:
+                if os.studentID != sp.studentID:
+                    os.status = 'rejected'
+
+        db.session.commit()
+        return True
+    return False
+
