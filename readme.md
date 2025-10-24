@@ -4,7 +4,7 @@
 
 ## Recent Changes
 
-- Fixed minor problem in views/user.py
+- Added all routes that there are CLI commands for. Check views/user.py for changes
 
 ## Next Tasks
 

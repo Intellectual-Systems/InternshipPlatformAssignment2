@@ -725,6 +725,39 @@
 		},
 		{
 			"name": "Create Staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94ff8151-da3c-417c-bc7a-a648e9c783b5",
+						"exec": [
+							"let { username, password, employerID} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"username\", username);\r",
+							"pm.collectionVariables.set(\"password\", password);\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Staff ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-96386822-43d8-427d-9239-31adaf36da99",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
