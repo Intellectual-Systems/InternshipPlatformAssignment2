@@ -464,6 +464,21 @@ test = AppGroup('test', help='Testing commands')
 @click.argument("type", default="all")
 def user_tests_command(type):
     sys.exit(pytest.main(["-k", "UserUnitTests"]))
+
+@test.command("emp", help="Run Employer tests")
+@click.argument("type", default="all")
+def user_tests_command(type):
+    sys.exit(pytest.main(["-k", "EmployerUnitTests"]))
+
+@test.command("sta", help="Run Staff tests")
+@click.argument("type", default="all")
+def user_tests_command(type):
+    sys.exit(pytest.main(["-k", "StaffUnitTests"]))
+
+@test.command("std", help="Run Student tests")
+@click.argument("type", default="all")
+def user_tests_command(type):
+    sys.exit(pytest.main(["-k", "StudentUnitTests"]))
     
 
 app.cli.add_command(test)

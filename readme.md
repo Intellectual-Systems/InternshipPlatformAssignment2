@@ -1,5 +1,32 @@
 <div align=justify>
 
+# Devlopment Notes
+
+## Recent Changes
+
+- Added basic Unit Tests for each user type. This includes:
+
+    | Unit Test | Class |
+    | :---: | :---: |
+    | Create Employer | EmployerUnitTests |
+    | Create InternshipPosition | EmployerUnitTests |
+    | Create Staff | StaffUnitTests |
+    | Enroll Student to shortlist | StaffUnitTests |
+    | Create Student | StudentUnitTests |
+
+- These tests can be found in tests/test_app.py
+
+- wsgi.py was also modified to implement the commands to run these tests
+
+## Next Tasks
+
+- Authorisation
+    - Distinguish user vs admin view
+
+- Integration Tests
+
+- Connect and test with Postman
+
 # Notes
 
 - Sample data for each table has been created. Use command 'flask list' to list data for all tables

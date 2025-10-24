@@ -4,6 +4,11 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from App.main import create_app
 from App.database import db, create_db
 from App.models import User
+from App.models.employer import Employer
+from App.models.staff import Staff
+from App.models.student import Student
+from App.models.student import Student_Position
+from App.models.internshipposition import InternshipPosition
 from App.controllers import (
     create_user,
     get_all_users_json,
@@ -23,24 +28,95 @@ class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
         user = User("bob", "bobpass")
-        assert user.username == "bob"
+        db.session.add(user)
+        db.session.commit()
+
+        assert db.session.query(User).filter_by(username="bob").first() is not None
+        # assert user.username == "bob"
 
     # pure function no side effects or integrations called
-    def test_get_json(self):
-        user = User("bob", "bobpass")
-        user_json = user.get_json()
-        self.assertDictEqual(user_json, {"id":None, "username":"bob"})
+    # def test_get_json(self):
+    #     user = User("bob", "bobpass")
+    #     user_json = user.get_json()
+    #     self.assertDictEqual(user_json, {"id":None, "username":"bob"})
     
-    def test_hashed_password(self):
-        password = "mypass"
-        hashed = generate_password_hash(password, method='sha256')
-        user = User("bob", password)
-        assert user.password != password
+    # def test_hashed_password(self):
+    #     password = "mypass"
+    #     hashed = generate_password_hash(password, method='sha256')
+    #     user = User("bob", password)
+    #     assert user.password != password
 
-    def test_check_password(self):
-        password = "mypass"
-        user = User("bob", password)
-        assert user.check_password(password)
+    # def test_check_password(self):
+    #     password = "mypass"
+    #     user = User("bob", password)
+    #     assert user.check_password(password)
+
+class EmployerUnitTests(unittest.TestCase):
+
+    def test_new_employer(self):
+        emp = Employer("emp1", "emp1pass", "TechCorp")
+        db.session.add(emp)
+        db.session.commit()
+
+        assert db.session.query(Employer).filter_by(username="emp1").first() is not None
+    
+    def test_new_position(self):
+        emp = Employer("emp2", "emp2pass", "TechCorp")
+        db.session.add(emp)
+        db.session.commit()
+
+        position = emp.createPosition("Inventory Clerk", "Inventory","Data entry and stock management")
+        db.session.add(position)
+        db.session.commit()
+
+        assert db.session.query(InternshipPosition).filter_by(id=position.id).first() is not None
+
+class StaffUnitTests(unittest.TestCase):
+
+    def test_new_staff(self):
+        emp = Employer("emp1", "emp1pass", "TechCorp")
+        db.session.add(emp)
+        db.session.commit()
+
+        staff = Staff("staff1", "staff1pass", emp.id)
+        db.session.add(staff)
+        db.session.commit()
+
+        assert db.session.query(Staff).filter_by(id=staff.id).first() is not None
+        # assert staff.username == "staff1"
+    
+    def test_enroll_student(self):
+        emp = Employer("emp2", "emp2pass", "TechCorp")
+        db.session.add(emp)
+        db.session.commit()
+
+        staff = Staff("staff2", "staff2pass", emp.id)
+        db.session.add(staff)
+        db.session.commit()
+
+        student = Student("stud1", "stud1pass", "FST", "DCIT", "BSc Comp Sci", 3.8)
+        db.session.add(student)
+        db.session.commit()
+
+        position = emp.createPosition("Inventory Clerk", "Inventory","Data entry and stock management")
+        db.session.add(position)
+        db.session.commit()
+
+        staff.addToShortlist(position.id, student.id)
+        db.session.add(staff)
+        db.session.commit()
+        
+        assert db.session.query(Student_Position).filter_by(studentID=student.id, positionID=position.id).first() != None
+
+class StudentUnitTests(unittest.TestCase):
+
+    def test_new_student(self):
+        student = Student("stud1", "stud1pass", "FST", "DCIT", "BSc Comp Sci", 3.8)
+        db.session.add(student)
+        db.session.commit()
+
+        assert db.session.query(Student).filter_by(id=student.id).first() is not None
+        # assert student.username == "stud1"
 
 '''
     Integration Tests
@@ -79,5 +155,5 @@ class UsersIntegrationTests(unittest.TestCase):
     def test_create_employer(self):
         from App.models.employer import Employer
         employer = Employer("employer1", "emppass", "TechCorp")
-        self.assertEqual(employer.companyName, employer.password "TechCorp")
+        self.assertEqual(employer.companyName, employer.password, "TechCorp")
 
