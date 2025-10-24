@@ -1074,6 +1074,18 @@
 		{
 			"key": "description",
 			"value": ""
+		},
+		{
+			"key": "faculty",
+			"value": ""
+		},
+		{
+			"key": "degree",
+			"value": ""
+		},
+		{
+			"key": "gpa",
+			"value": ""
 		}
 	]
 }
