@@ -223,7 +223,7 @@
 			]
 		},
 		{
-			"name": "Login - Success Copy",
+			"name": "Login - Success",
 			"event": [
 				{
 					"listen": "test",
@@ -351,40 +351,6 @@
 					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQyNjM1OCwianRpIjoiYzE4ODBjNjEtYjg4Ny00Mzk3LWE4YTQtNzk5M2U1MjU4MjdmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ikplbm5pbmdzLkdvb2R3aW4iLCJuYmYiOjE3MDk0MjYzNTgsImV4cCI6MTcwOTQ4MDM1OH0.I7MDJf8BRwuvzCX0O8rDEocJXsv7yHx3E8BNwUw8PYw\"\n}"
 				}
 			]
-		},
-		{
-			"name": "Login",
-			"id": "42549608-41077fe7-6a94-406b-95a4-ab353e6ffd00",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\t\"username\" :\"bob\",\r\n\t\"password\": \"bobpass\"\r\n}"
-				},
-				"url": {
-					"raw": "{{host}}/login",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"login"
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "Get users",
