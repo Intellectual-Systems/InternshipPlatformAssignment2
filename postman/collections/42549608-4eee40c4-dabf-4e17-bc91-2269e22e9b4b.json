@@ -80,6 +80,18 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "List Users",
+			"id": "42549608-3220968a-8a9a-4783-bb60-383d13cf105c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
