@@ -25,15 +25,4 @@ class Staff(User):
     def __repr__(self):
         return f"Staff[id= {self.id}, username= {self.username}, employerID= {self.employerID}]"
 
-    def addToShortlist(self, positionID, studentID):
-        
-        position = InternshipPosition.query.filter_by(id=positionID).first()
-
-        student = Student.query.filter_by(id=studentID).first()
-
-        if position != None and student != None:
-            position.shortlist.append(student)
-            db.session.commit()
-            return True
-
-        return False
+    
