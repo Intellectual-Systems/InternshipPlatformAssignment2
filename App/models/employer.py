@@ -23,17 +23,8 @@ class Employer(User):
     def __repr__(self):
         return f"Employer[id= {self.id}, username= {self.username}, companyName= {self.companyName}]"
 
-    def createPosition(self, positionTitle, department, description):
-        pos = InternshipPosition(employerID=self.id, positionTitle=positionTitle, department=department, description=description)
-        db.session.add(pos)
-        db.session.commit()
-        return pos
+
     
-    def acceptReject(self, studentID, positionID, status, message=None):
-        sp = Student_Position.query.filter_by(studentID=studentID, positionID=positionID).first()
-        if sp:
-            sp.status = status
-            sp.employer_response = message
 
             # Automatically reject every other student who was shortlisted for this position
 
