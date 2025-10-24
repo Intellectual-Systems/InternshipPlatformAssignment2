@@ -15,6 +15,13 @@ class Staff(User):
         self.set_password(password)
         self.employerID = employerID
 
+    def get_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'employerID': self.employerID
+        }
+
     def __repr__(self):
         return f"Staff[id= {self.id}, username= {self.username}, employerID= {self.employerID}]"
 

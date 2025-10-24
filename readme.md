@@ -1,31 +1,25 @@
 <div align=justify>
 
-# Devlopment Notes
+# Development Notes
 
 ## Recent Changes
 
-- Added basic Unit Tests for each user type. This includes:
+- Added basic routes for listing each table in json
 
-    | Unit Test | Class |
-    | :---: | :---: |
-    | Create Employer | EmployerUnitTests |
-    | Create InternshipPosition | EmployerUnitTests |
-    | Create Staff | StaffUnitTests |
-    | Enroll Student to shortlist | StaffUnitTests |
-    | Create Student | StudentUnitTests |
+- Added get_json() functions for each model for returning data for routes
 
-- These tests can be found in tests/test_app.py
+- All changes can be found in views/user.py and the models folder
 
-- wsgi.py was also modified to implement the commands to run these tests
+- These routes were tested with postman and do work. However, these are just simple get requests. Implementing tests on postman's end still needs to be implemented
 
 ## Next Tasks
+
+- Implement all necessary routes
 
 - Authorisation
     - Distinguish user vs admin view
 
 - Integration Tests
-
-- Connect and test with Postman
 
 # Notes
 

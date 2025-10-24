@@ -64,3 +64,30 @@ def list_users():
         'positions': positions
     }
     return jsonify(users)
+
+# Basic routes for listing data
+
+@user_views.route('/list-emp', methods=['GET'])
+def list_employers():
+    employers = get_all_employers()
+    return jsonify([emp.get_json() for emp in employers])
+
+@user_views.route('/list-pos', methods=['GET'])
+def list_positions():
+    positions = get_all_positions()
+    return jsonify([pos.get_json() for pos in positions])
+
+@user_views.route('/list-sta', methods=['GET'])
+def list_staff():
+    staff = get_all_staff()
+    return jsonify([sta.get_json() for sta in staff])
+
+@user_views.route('/list-std', methods=['GET'])
+def list_student():
+    students = get_all_students()
+    return jsonify([stu.get_json() for stu in students])
+
+@user_views.route('/list-sho', methods=['GET'])
+def list_shortlists():
+    shortlists = get_all_student_positions()
+    return jsonify([sho.get_json() for sho in shortlists])

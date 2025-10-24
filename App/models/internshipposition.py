@@ -17,5 +17,15 @@ class InternshipPosition(db.Model):
         self.department = department
         self.description = description
     
+    def get_json(self):
+        return{
+            'id': self.id,
+            'employerID': self.employerID,
+            'positionTitle': self.positionTitle,
+            'department': self.department,
+            'description': self.description,
+            'shortlist': [student.id for student in self.shortlist]
+        }
+
     def __repr__(self):
         return f"InternshipPosition[id= {self.id}, employerID= {self.employerID}, positionTitle= {self.positionTitle}, department= {self.department}, description= {self.description}, shortlist= {[student.id for student in self.shortlist]}]"

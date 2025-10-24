@@ -12,6 +12,14 @@ class Student_Position(db.Model):
         self.studentID = studentID
         self.positionID = positionID
 
+    def get_json(self):
+        return {
+            'studentID': self.studentID,
+            'positionID': self.positionID,
+            'status': self.status,
+            'employer_response': self.employer_response
+        }
+
     def __repr__(self):
         return f"Student_Position[studentID= {self.studentID} -> positionID= {self.positionID}, status= {self.status}, employer_response= {self.employer_response}]"
 
@@ -33,6 +41,16 @@ class Student(User):
         self.department = department
         self.degree = degree
         self.gpa = gpa
+
+    def get_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'faculty': self.faculty,
+            'department': self.department,
+            'degree': self.degree,
+            'gpa': self.gpa
+        }
 
     def __repr__(self):
         return f"Student[id= {self.id}, username= {self.username}, faculty= {self.faculty}, department= {self.department}, degree= {self.degree}, gpa= {self.gpa}]"
