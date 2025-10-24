@@ -6,14 +6,20 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "Root",
 			"id": "42549608-73322220-25a1-4970-8b9c-68e595e33e75",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
 			},
 			"response": []
 		},
@@ -48,6 +54,18 @@
 						"login"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "42549608-4630ec10-c4fc-41c1-b33b-688bffaa4b41",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
