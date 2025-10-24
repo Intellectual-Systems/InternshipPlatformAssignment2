@@ -843,6 +843,42 @@
 		},
 		{
 			"name": "Create Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1774eb93-f23a-4b24-bbd5-434b87f46d9e",
+						"exec": [
+							"let { username, password, faculty, department, degree, gpa} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"username\", username);\r",
+							"pm.collectionVariables.set(\"password\", password);\r",
+							"pm.collectionVariables.set(\"faculty\", faculty);\r",
+							"pm.collectionVariables.set(\"department\", department);\r",
+							"pm.collectionVariables.set(\"degree\", degree);\r",
+							"pm.collectionVariables.set(\"gpa\", gpa);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
