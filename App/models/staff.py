@@ -1,7 +1,5 @@
 from App.database import db
 from .user import User
-from .internshipposition import InternshipPosition
-from .student import Student
 
 from sqlalchemy import select
 
