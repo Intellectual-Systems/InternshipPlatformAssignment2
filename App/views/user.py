@@ -198,7 +198,7 @@ def create_student_action():
 def enroll_student_action():
     data = request.json
     sta = db.session.query(Staff).filter_by(id=data['staffID']).first()
-    sta.addToShortlist(data['positionID'], data['studentID'])
+    addToShortlist(sta.id,data['positionID'], data['studentID'])
     
     return jsonify({'message': f"Student {data['studentID']} shortlisted for position {data['positionID']} by staff {data['staffID']} successfully"}), 201
 

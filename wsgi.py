@@ -6,10 +6,10 @@ from App.models import User
 from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users, initialize )
 
-from App.controllers.employer import create_employer, get_employer_by_id, get_all_employers, view_positions, view_position_shortlist
+from App.controllers.employer import create_employer, get_employer_by_id, get_all_employers, view_positions, view_position_shortlist, create_position
 from App.controllers.staff import get_staff_by_id, get_all_staff, create_staff
 from App.controllers.student import get_student_by_id, get_all_students, create_student
-from App.controllers.internshipposition import get_position_by_id, create_position
+from App.controllers.internshipposition import get_position_by_id
 
 from App.models.employer import Employer
 from App.models.staff import Staff
