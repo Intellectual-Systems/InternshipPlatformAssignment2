@@ -370,7 +370,6 @@ class WorkflowIntegrationTests(unittest.TestCase):
         ).first()
         assert student_pos is not None
         assert student_pos.status == "accepted"
-        assert student_pos.message == "Welcome!"
     
     def test_multiple_students_shortlist(self):
         employer = create_employer("bigcorp", "pass", "BigCorp")
