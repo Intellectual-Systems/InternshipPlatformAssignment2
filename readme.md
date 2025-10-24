@@ -4,9 +4,7 @@
 
 ## Recent Changes
 
-- Added POST routes for creating sample entries for each table
-
-- Changes can be found in views/user.py
+- Fixed minor problem in views/user.py
 
 ## Next Tasks
 

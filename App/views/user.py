@@ -67,6 +67,7 @@ def list_users():
 # Basic routes for listing data
 
 @user_views.route('/list-emp', methods=['GET'])
+@jwt_required()
 def list_employers():
     employers = get_all_employers()
     return jsonify([emp.get_json() for emp in employers])
@@ -138,8 +139,7 @@ def scenario_test():
 def create_employer_action():
     data = request.json
     emp = create_employer(data['username'], data['password'], data['companyName'])
-    db.session.add(emp)
-    db.session.commit()
+    
     return jsonify({'message': f"Employer {emp.username} created with id {emp.id}"}), 201
 
 # Creates a position using the specified attributes which includes the employer's id
@@ -159,8 +159,7 @@ def create_position_action():
 def create_staff_action():
     data = request.json
     sta = create_staff(data['username'], data['password'], data['employerID'])
-    db.session.add(sta)
-    db.session.commit()
+    
     return jsonify({'message': f"Staff {sta.username} created with id {sta.id}"}), 201
 
 # Creates a student using the specified attributes
@@ -169,8 +168,7 @@ def create_staff_action():
 def create_student_action():
     data = request.json
     stu = create_student(data['username'], data['password'], data['faculty'], data['department'], data['degree'], data['gpa'])
-    db.session.add(stu)
-    db.session.commit()
+    
     return jsonify({'message': f"Student {stu.username} created with id {stu.id}"}), 201
 
 # Enrolls a student by creates a shortlist(student_position) entry using the specified attributes which includes staff id, position id and student id
@@ -180,6 +178,5 @@ def enroll_student_action():
     data = request.json
     sta = db.session.query(Staff).filter_by(id=data['staffID']).first()
     sta.addToShortlist(data['positionID'], data['studentID'])
-    db.session.add(sta)
-    db.session.commit()
+    
     return jsonify({'message': f"Student {data['studentID']} shortlisted for position {data['positionID']} by staff {data['staffID']} successfully"}), 201
