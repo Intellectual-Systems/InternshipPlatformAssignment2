@@ -223,6 +223,14 @@ class StudentUnitTests(unittest.TestCase):
         assert student.degree == "BSc Comp Sci"
         assert student.gpa == 3.8
 
+    def test_student_inherits_from_user(self):
+        student = Student("stud1", "stud1pass", "FST", "DCIT", "BSc Comp Sci", 3.8)
+        assert isinstance(student, User)
+
+    def test_student_password_hashed(self):
+        password = "mypass"
+        student = Student("stud1", password, "FST", "DCIT", "BSc Comp Sci", 3.8)
+        assert student.password != password
 
 if __name__ == "__main__":
     unittest.main()
