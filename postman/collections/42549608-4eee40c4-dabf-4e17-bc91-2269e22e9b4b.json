@@ -361,6 +361,39 @@
 		},
 		{
 			"name": "Get users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65795fba-f4f0-4fec-8522-27aaaa92b64f",
+						"exec": [
+							"ar schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `User should have an id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
