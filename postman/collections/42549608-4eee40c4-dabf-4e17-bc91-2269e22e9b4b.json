@@ -660,18 +660,6 @@
 			"response": []
 		},
 		{
-			"name": "Create Student",
-			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
 			"name": "List Staff",
 			"event": [
 				{
@@ -723,6 +711,18 @@
 						"list-sta"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": []
 			},
 			"response": []
 		},
@@ -795,7 +795,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Enroll",
 			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
