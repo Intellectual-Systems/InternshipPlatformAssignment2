@@ -613,7 +613,7 @@
 							"pm.collectionVariables.set(\"description\", description);\r",
 							"\r",
 							"pm.test(\r",
-							"\t\"Should respond with <username> created message\", \r",
+							"\t\"Should respond with <positionTitle> created message\", \r",
 							"\tfunction () {\r",
 							"\t\tlet { message } = pm.response.json();\r",
 							"    \tpm.expect(message).to.eql(`Position ${positionTitle} created`);\r",
