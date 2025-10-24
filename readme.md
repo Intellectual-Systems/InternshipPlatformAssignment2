@@ -4,9 +4,7 @@
 
 ## Recent Changes
 
-- Added POST routes for creating sample entries for each table
-
-- Changes can be found in views/user.py
+- Removed unecessary code from views/user.py (was using db.session.add and commit even though controllers handled that)
 
 ## Next Tasks
 
