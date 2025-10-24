@@ -24,6 +24,18 @@
 			"response": []
 		},
 		{
+			"name": "Initialize App",
+			"id": "42549608-4630ec10-c4fc-41c1-b33b-688bffaa4b41",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "Login",
 			"id": "42549608-41077fe7-6a94-406b-95a4-ab353e6ffd00",
 			"protocolProfileBehavior": {
@@ -54,18 +66,6 @@
 						"login"
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "New Request",
-			"id": "42549608-4630ec10-c4fc-41c1-b33b-688bffaa4b41",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": []
 			},
 			"response": []
 		}
