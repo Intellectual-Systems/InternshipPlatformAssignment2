@@ -908,6 +908,54 @@
 			"response": []
 		},
 		{
+			"name": "List Students",
+			"id": "42549608-faca7625-9eb3-40a5-93c7-0e67f4e679c7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/list-std",
+					"path": [
+						"list-std"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enroll Student",
+			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"staffID\" : 14,\r\n    \"studentID\" : 15,\r\n    \"positionID\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/enroll",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"enroll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List Shortlists",
 			"event": [
 				{
@@ -964,36 +1012,6 @@
 			"response": []
 		},
 		{
-			"name": "Enroll Student",
-			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"staffID\" : 14,\r\n    \"studentID\" : 15,\r\n    \"positionID\" : 4\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/enroll",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"enroll"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "View Employer Positions",
 			"id": "42549608-521a76a2-efb4-43fd-805c-dd107bbe512b",
 			"protocolProfileBehavior": {
@@ -1032,18 +1050,6 @@
 		{
 			"name": "View Student Shortlists",
 			"id": "42549608-d33a1185-5310-44e6-8b6a-e3829a08a1e2",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "List Students",
-			"id": "42549608-faca7625-9eb3-40a5-93c7-0e67f4e679c7",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
