@@ -90,3 +90,42 @@ def list_student():
 def list_shortlists():
     shortlists = get_all_student_positions()
     return jsonify([sho.get_json() for sho in shortlists])
+
+# Route for scenario test
+
+@user_views.route('/scenario', methods=['GET'])
+def scenario_test():
+    emp = create_employer("emp1", "emppass", "Tech Corp")
+    db.session.add(emp)
+    db.session.commit()
+
+    pos = emp.createPosition("Intern Developer", "IT", "Assist in development tasks")
+    db.session.add(pos)
+    db.session.commit()
+
+    sta = create_staff("sta1", "stapass", emp.id)
+    db.session.add(sta)
+    db.session.commit()
+
+    stu = create_student("stu1", "stupass", "FST", "DCIT", "BSc Comp Sci", 3.8)
+    db.session.add(stu)
+    db.session.commit()
+
+    sta.addToShortlist(pos.id, stu.id)
+    db.session.add(stu)
+    db.session.add(pos)
+    db.session.commit()
+
+    emp.acceptReject(stu.id, pos.id, "Accepted", "Welcome aboard!")
+    db.session.add(emp)
+    db.session.add(stu)
+    db.session.add(pos)
+    db.session.commit()
+
+    return jsonify({
+        'employer': emp.get_json(),
+        'position': pos.get_json(),
+        'staff': sta.get_json(),
+        'student': stu.get_json(),
+        'shortlist': Student_Position.query.filter_by(studentID=stu.id, positionID=pos.id).first().get_json()
+    })

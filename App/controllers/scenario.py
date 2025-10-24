@@ -1,14 +1,14 @@
-from App.models.employer import Employer
-from App.models.staff import Staff
-from App.models.student import Student
+from App.controllers.employer import create_employer
+from App.controllers.staff import create_staff
+from App.controllers.student import create_student
 
 from App.database import db
 
 
 def create_scenario():
-    emp = Employer('Satoru Iwata', 'iwatapass', 'Nintendo')
-    emp2 = Employer('Devon Pritchard', 'devpass', 'Nintendo of America')
-    emp3 = Employer('Hidetaka Miyazaki', 'hidepass', 'FromSoftware')
+    emp = create_employer('Satoru Iwata', 'iwatapass', 'Nintendo')
+    emp2 = create_employer('Devon Pritchard', 'devpass', 'Nintendo of America')
+    emp3 = create_employer('Hidetaka Miyazaki', 'hidepass', 'FromSoftware')
     db.session.add(emp)
     db.session.add(emp2)
     db.session.add(emp3)
@@ -22,21 +22,21 @@ def create_scenario():
     db.session.add(pos3)
     db.session.commit()
     
-    sta = Staff(username='Masahiro Sakurai', password='smashpass', employerID=emp.id)
-    sta2 = Staff(username='Yoshio Sakamoto', password='metropass', employerID=emp.id)
-    sta3 = Staff(username='Yoshiaki Koizumi', password='majorapass', employerID=emp.id)
-    sta4 = Staff(username='Shigeru Miyamoto', password='mariopass', employerID=emp.id)
+    sta = create_staff(username='Masahiro Sakurai', password='smashpass', employerID=emp.id)
+    sta2 = create_staff(username='Yoshio Sakamoto', password='metropass', employerID=emp.id)
+    sta3 = create_staff(username='Yoshiaki Koizumi', password='majorapass', employerID=emp.id)
+    sta4 = create_staff(username='Shigeru Miyamoto', password='mariopass', employerID=emp.id)
     db.session.add(sta)
     db.session.add(sta2)
     db.session.add(sta3)
     db.session.add(sta4)
     db.session.commit()
 
-    stu = Student(username='Naoto Kuroshima', password='streetpass', faculty='FHE', department='DCFA', degree='BSc Visual Arts', gpa=3.8)
-    stu2 = Student(username='Eric Barone', password='stardewpassey', faculty='FST', department='DCIT', degree='BSc Comp Sci', gpa=3.9)
-    stu3 = Student(username='Toby Fox', password='underpass', faculty='FST', department='DCIT', degree='BSc Comp Sci & Management', gpa=3.7)
-    stu4 = Student(username='Milton Guasti', password='m2pass', faculty='FST', department='DCIT', degree='BSc IT', gpa=3.6)
-    stu5 = Student(username='Thomas Grip', password='amnepass', faculty='FHE', department='DCFA', degree='BSc Visual Arts', gpa=3.5)
+    stu = create_student(username='Naoto Kuroshima', password='streetpass', faculty='FHE', department='DCFA', degree='BSc Visual Arts', gpa=3.8)
+    stu2 = create_student(username='Eric Barone', password='stardewpassey', faculty='FST', department='DCIT', degree='BSc Comp Sci', gpa=3.9)
+    stu3 = create_student(username='Toby Fox', password='underpass', faculty='FST', department='DCIT', degree='BSc Comp Sci & Management', gpa=3.7)
+    stu4 = create_student(username='Milton Guasti', password='m2pass', faculty='FST', department='DCIT', degree='BSc IT', gpa=3.6)
+    stu5 = create_student(username='Thomas Grip', password='amnepass', faculty='FHE', department='DCFA', degree='BSc Visual Arts', gpa=3.5)
     db.session.add(stu)
     db.session.add(stu2)
     db.session.add(stu3)

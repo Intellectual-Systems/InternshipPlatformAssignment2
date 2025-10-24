@@ -361,6 +361,39 @@
 		},
 		{
 			"name": "Get users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65795fba-f4f0-4fec-8522-27aaaa92b64f",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `User should have an id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -376,6 +409,84 @@
 		},
 		{
 			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3813f70-7234-4083-bec8-5d20fbd3a1c8",
+						"exec": [
+							"var schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employers\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\" : {\r",
+							"                \"type\" : \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"companyName\": { \"type\": \"string\" },\r",
+							"                    \"id\": { \"type\": \"number\" },\r",
+							"                    \"username\": { \"type\": \"string\" }\r",
+							"                }\r",
+							"            }\r",
+							"        },\r",
+							"        \"staff\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"employerID\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                }\r",
+							"               \r",
+							"            }\r",
+							"        },\r",
+							"        \"students\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"degree\": { \"type\": \"string\" },\r",
+							"                    \"department\": { \"type\": \"string\" },\r",
+							"                    \"faculty\": { \"type\": \"string\" },\r",
+							"                    \"gpa\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                }\r",
+							"                \r",
+							"            }\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [  ],\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Users should have an employers, staff and students with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "221b6bb6-6a38-4051-ba71-abe3bf0b4d89",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-3220968a-8a9a-4783-bb60-383d13cf105c",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -384,13 +495,53 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "{{host}} /list",
+					"host": [
+						"{{host}} "
+					],
+					"path": [
+						"list"
+					]
 				}
 			},
 			"response": []
 		},
 		{
 			"name": "List Employers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce8dab7e-5b2e-4218-be5f-a75088e60a04",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"companyName\":{\"type\":\"string\"},\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"companyName\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer should have an companyName, id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-56d92c61-e5f6-48ac-98d0-f0229bd3dbb8",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -412,6 +563,47 @@
 		},
 		{
 			"name": "List Positions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dca410f4-df70-4a09-9e98-e005f2a6043a",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-1795730c-ffc0-4b9e-b670-1b06466f616e",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -433,6 +625,40 @@
 		},
 		{
 			"name": "List Staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2073599a-2f6f-43d8-af0c-8da4da8d3938",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employerID\": { \"type\": \"number\" },\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"employerID\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Staff should have an employerID, id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-62174a9b-3239-418e-b713-8aaec28e59f6",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -453,28 +679,42 @@
 			"response": []
 		},
 		{
-			"name": "List Staff",
-			"id": "42549608-2c776d2d-643f-4ce1-a1e2-c04ebd7e09de",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list-std",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list-std"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "List Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "511e762f-4db6-49c5-ba95-d8cd8ff91cdd",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"number\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"number\" }\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Staff should have employer_response, positionID, status and studentID with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-7367830e-f450-4097-9f11-fbe49f1c28af",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -491,6 +731,18 @@
 						"list-sho"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario",
+			"id": "42549608-5ee133ca-e37e-450f-bd77-bcf655138901",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
