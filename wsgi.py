@@ -457,3 +457,13 @@ app.cli.add_command(student_cli)
     
 
 # app.cli.add_command(test)
+
+test = AppGroup('test', help='Testing commands') 
+
+@test.command("user", help="Run User tests")
+@click.argument("type", default="all")
+def user_tests_command(type):
+    sys.exit(pytest.main(["-k", "UserUnitTests"]))
+    
+
+app.cli.add_command(test)
