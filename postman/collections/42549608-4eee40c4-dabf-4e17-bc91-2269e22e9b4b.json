@@ -965,6 +965,22 @@
 		{
 			"key": "companyName",
 			"value": ""
+		},
+		{
+			"key": "employerID",
+			"value": ""
+		},
+		{
+			"key": "positionTitle",
+			"value": ""
+		},
+		{
+			"key": "department",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
 		}
 	]
 }
