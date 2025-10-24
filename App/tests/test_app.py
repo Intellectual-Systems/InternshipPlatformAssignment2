@@ -213,5 +213,16 @@ class StaffUnitTests(unittest.TestCase):
         staff = Staff("staff1", password, employer_id=1)
         assert staff.password != password
 
+class StudentUnitTests(unittest.TestCase):
+
+    def test_new_student(self):
+        student = Student("stud1", "stud1pass", "FST", "DCIT", "BSc Comp Sci", 3.8)
+        assert student.username == "stud1"
+        assert student.faculty == "FST"
+        assert student.department == "DCIT"
+        assert student.degree == "BSc Comp Sci"
+        assert student.gpa == 3.8
+
+
 if __name__ == "__main__":
     unittest.main()
