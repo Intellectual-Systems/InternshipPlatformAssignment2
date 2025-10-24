@@ -25,13 +25,55 @@
 		},
 		{
 			"name": "Initialize App",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2516b48d-7d6d-4b1e-983c-05345c4c5586",
+						"exec": [
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"\r",
+							"if(pm.response.headers.get('Content-Type') == 'application/json'){\r",
+							"\r",
+							"\tconst {message} = pm.response.json();\r",
+							"\r",
+							"\tpm.test(\"Should return the message 'Database Initialized!'\", function () {\r",
+							"\t\t\tpm.expect(message).to.eql('Database Initialized!');\r",
+							"\t\t}\r",
+							"\t);\r",
+							"\r",
+							"\tpm.test(\"Should have the correct status code\", function () {\r",
+							"\t\t\r",
+							"\t\tpm.expect(pm.response.code).to.eql(200);\r",
+							"\t\t\r",
+							"\t});\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-4630ec10-c4fc-41c1-b33b-688bffaa4b41",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/init",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"init"
+					]
+				}
 			},
 			"response": []
 		},
@@ -70,7 +112,7 @@
 			"response": []
 		},
 		{
-			"name": "Create Employer",
+			"name": "Get users",
 			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -90,6 +132,111 @@
 			"request": {
 				"method": "GET",
 				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "List Employers",
+			"id": "42549608-56d92c61-e5f6-48ac-98d0-f0229bd3dbb8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-emp",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-emp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Positions",
+			"id": "42549608-1795730c-ffc0-4b9e-b670-1b06466f616e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-pos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-pos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Staff",
+			"id": "42549608-62174a9b-3239-418e-b713-8aaec28e59f6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-sta",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-sta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Staff",
+			"id": "42549608-2c776d2d-643f-4ce1-a1e2-c04ebd7e09de",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-std",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-std"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Shortlists",
+			"id": "42549608-7367830e-f450-4097-9f11-fbe49f1c28af",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-sho",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-sho"
+					]
+				}
 			},
 			"response": []
 		}
