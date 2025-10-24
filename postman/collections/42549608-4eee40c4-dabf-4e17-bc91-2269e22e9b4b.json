@@ -416,8 +416,6 @@
 						"id": "b3813f70-7234-4083-bec8-5d20fbd3a1c8",
 						"exec": [
 							"var schema = {\r",
-							"  \"type\": \"array\",\r",
-							"  \"items\": {\r",
 							"    \"type\": \"object\",\r",
 							"    \"properties\": {\r",
 							"        \"employers\": {\r",
@@ -460,7 +458,6 @@
 							"        }\r",
 							"    },\r",
 							"    \"required\": [  ],\r",
-							"    }\r",
 							"};\r",
 							"\r",
 							"\r",
@@ -734,6 +731,18 @@
 						"list-sho"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario",
+			"id": "42549608-5ee133ca-e37e-450f-bd77-bcf655138901",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
