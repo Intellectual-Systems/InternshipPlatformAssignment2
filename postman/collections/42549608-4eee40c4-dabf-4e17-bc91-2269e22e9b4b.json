@@ -531,7 +531,10 @@
 					}
 				},
 				"url": {
-					"raw": "/create-emp",
+					"raw": "{{host}}/create-emp",
+					"host": [
+						"{{host}}"
+					],
 					"path": [
 						"create-emp"
 					]
@@ -899,6 +902,10 @@
 		},
 		{
 			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "companyName",
 			"value": ""
 		}
 	]
