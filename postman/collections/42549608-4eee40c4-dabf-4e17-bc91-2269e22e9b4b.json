@@ -481,6 +481,39 @@
 		},
 		{
 			"name": "Create Employer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a34e20e1-d61f-471c-be9e-12f47d7068d5",
+						"exec": [
+							"let { username, password, companyName} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set('username', username);\r",
+							"pm.collectionVariables.set('password', password);\r",
+							"pm.collectionVariables.set('companyName', companyName);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Employer ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-791c7890-95fc-4985-b4cd-1663e7564e69",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
