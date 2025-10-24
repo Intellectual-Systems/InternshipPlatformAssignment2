@@ -78,7 +78,7 @@
 			"response": []
 		},
 		{
-			"name": "Sign Up - Success Copy",
+			"name": "Sign Up - Success",
 			"event": [
 				{
 					"listen": "test",
