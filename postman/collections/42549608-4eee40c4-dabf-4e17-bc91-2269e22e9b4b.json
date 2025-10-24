@@ -97,7 +97,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"username\" :\"rocky3223\",\r\n\t\"password\": \"lol\"\r\n}"
+					"raw": "{\r\n\t\"username\" :\"bob\",\r\n\t\"password\": \"bobpass\"\r\n}"
 				},
 				"url": {
 					"raw": "{{host}}/login",
