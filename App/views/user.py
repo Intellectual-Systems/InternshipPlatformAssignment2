@@ -129,3 +129,27 @@ def scenario_test():
         'student': stu.get_json(),
         'shortlist': Student_Position.query.filter_by(studentID=stu.id, positionID=pos.id).first().get_json()
     })
+    
+@user_views.route('/create-employer', methods=['POST'])
+def create_employer_endpoint():
+    data = request.json
+    emp = create_employer(data['username'], data['password'], data['companyName'])
+    return jsonify({'message': f"Employer {emp.username} created"}), 201
+
+@user_views.route('/create-staff', methods=['POST'])
+def create_staff_endpoint():
+    data = request.json
+    sta = create_staff(data['username'], data['password'], data['employerID'])
+    return jsonify({'message': f"Staff {sta.username} created"}), 201
+
+@user_views.route('/create-student', methods=['POST'])
+def create_student_endpoint():
+    data = request.json
+    stu = create_student(data['username'], data['password'], data['faculty'], data['department'], data['program'], data['gpa'])
+    return jsonify({'message': f"Student {stu.username} created"}), 201
+
+@user_views.route('/create-position', methods=['POST'])
+def create_position_endpoint():
+    data = request.json
+    pos = create_position(data['employerID'], data['positionTitle'], data['department'], data['description'])
+    return jsonify({'message': f"Position {pos.positionTitle} created"}), 201
