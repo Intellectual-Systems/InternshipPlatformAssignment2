@@ -540,6 +540,20 @@
 		},
 		{
 			"name": "List Staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2073599a-2f6f-43d8-af0c-8da4da8d3938",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-62174a9b-3239-418e-b713-8aaec28e59f6",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
