@@ -241,7 +241,9 @@
 							"",
 							"   "
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				},
 				{
@@ -251,7 +253,9 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -267,7 +271,6 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
@@ -282,11 +285,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/login",
+					"raw": "{{host}}/api/login",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
+						"api",
 						"login"
 					]
 				},
