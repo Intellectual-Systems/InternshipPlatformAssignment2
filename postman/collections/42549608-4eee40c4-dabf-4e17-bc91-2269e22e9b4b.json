@@ -360,48 +360,6 @@
 			]
 		},
 		{
-			"name": "Get users",
-			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get users Copy",
-			"id": "42549608-5e8523ce-e1ce-4760-81f5-a4710dac2dce",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "List Users",
 			"event": [
 				{
