@@ -1183,7 +1183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"employerID\": \"2\",\r\n    \"positionID\": \"3\",\r\n    \"studentID\": \"2\",\r\n    \"status\": \"accepted\",\r\n    \"message\": \"Congrats\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
