@@ -375,6 +375,60 @@ def add_to_shortlist_command():
     else:
         print('\nFailed to add student to shortlist.')
 
+@staff_cli.command("remove-from-shortlist", help="Remove a student from a position's shortlist")
+def remove_from_shortlist_command():
+    print("\nStaff:\n")
+    staff = get_all_staff()
+    for sta in staff:
+        print(f'ID: {sta.id} | Name: {sta.username}')
+    
+    staff_id = input('\nEnter staff ID: ')
+    staff_member = get_staff_by_id(staff_id)
+    if not staff_member:
+        print('Staff not found.')
+        return
+
+    print("\nPositions:\n")
+    positions = InternshipPosition.query.filter_by(employerID=staff_member.employerID).all()
+    if not positions:
+        print('No positions found for this employer.')
+        return
+    
+    for pos in positions:
+        print(f'ID: {pos.id} | Title: {pos.positionTitle}')
+    
+    position_id = input('\nEnter position ID: ')
+    position = get_position_by_id(position_id)
+    if not position:
+        print('Position not found.')
+        return
+
+    print("\nShortlisted Students:\n")
+    shortlist = view_position_shortlist(position_id)
+    if not shortlist:
+        print('No students in the shortlist for this position.')
+        return
+    
+    for sp in shortlist:
+        student = get_student_by_id(sp.studentID)
+        print(f'ID: {student.id} | Name: {student.username} | Status: {sp.status}')
+    
+    student_id = input('\nEnter student ID to remove: ')
+    
+    sp = Student_Position.query.filter_by(studentID=student_id, positionID=position_id).first()
+    if not sp:
+        print('\nStudent not found in this position\'s shortlist.')
+        return
+    
+    confirm = input(f'\nAre you sure you want to remove this student from the shortlist? (y/n): ')
+    if confirm.lower() != 'y':
+        print('Action cancelled.')
+        return
+    
+    db.session.delete(sp)
+    db.session.commit()
+    print(f'\nStudent removed from shortlist successfully.\n')
+
 app.cli.add_command(staff_cli)
 
 '''
