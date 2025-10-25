@@ -22,12 +22,14 @@ from App.controllers.employer import (
     get_employer_by_id,
     get_all_employers,
     view_positions,
-    view_position_shortlist
+    view_position_shortlist,
+    acceptReject
 )
 from App.controllers.staff import (
     create_staff,
     get_staff_by_id,
-    get_all_staff
+    get_all_staff,
+    addToShortlist
 )
 from App.controllers.student import (
     create_student,
@@ -175,10 +177,9 @@ class EmployerIntegrationTests(unittest.TestCase):
         db.session.add(emp)
         db.session.commit()
 
-        position = emp.createPosition("Inventory Clerk", "Inventory","Data entry and stock management")
-        db.session.add(position)
-        db.session.commit()
-
+        # Use controller function instead of model method
+        position = create_position(emp.id, "Inventory Clerk", "Inventory", "Data entry and stock management")
+        
         assert db.session.query(InternshipPosition).filter_by(id=position.id).first() is not None
 
     def test_create_employer(self):
@@ -229,13 +230,11 @@ class StaffIntegrationTests(unittest.TestCase):
         db.session.add(student)
         db.session.commit()
 
-        position = emp.createPosition("Inventory Clerk", "Inventory","Data entry and stock management")
-        db.session.add(position)
-        db.session.commit()
+        # Use controller function instead of model method
+        position = create_position(emp.id, "Inventory Clerk", "Inventory", "Data entry and stock management")
 
-        staff.addToShortlist(position.id, student.id)
-        db.session.add(staff)
-        db.session.commit()
+        # Use controller function with staff.id instead of staff instance method
+        addToShortlist(staff.id, position.id, student.id)
         
         assert db.session.query(Student_Position).filter_by(studentID=student.id, positionID=position.id).first() != None
 
@@ -261,8 +260,8 @@ class StaffIntegrationTests(unittest.TestCase):
         student = create_student("student1", "pass", "FST", "DCIT", "BSc CS", 3.5)
         position = create_position(employer.id, "Intern", "IT", "Description")
         
-        # Staff adds student to shortlist
-        result = staff.addToShortlist(position.id, student.id)
+        # Staff adds student to shortlist using controller function
+        result = addToShortlist(staff.id, position.id, student.id)
         assert result == True
         
         # Verify student was added
@@ -337,8 +336,8 @@ class WorkflowIntegrationTests(unittest.TestCase):
         student = create_student("john", "pass", "FST", "DCIT", "BSc CS", 3.7)
         assert student is not None
         
-        # 5. Staff adds student to position shortlist
-        result = staff.addToShortlist(position.id, student.id)
+        # 5. Staff adds student to position shortlist using controller function
+        result = addToShortlist(staff.id, position.id, student.id)
         assert result == True
         
         # 6. Verify shortlist
@@ -355,11 +354,11 @@ class WorkflowIntegrationTests(unittest.TestCase):
         student = create_student("jane", "pass", "FST", "DCIT", "BSc IT", 3.9)
         position = create_position(employer.id, "Data Analyst", "Analytics", "Data work")
         
-        # Add student to shortlist
-        staff.addToShortlist(position.id, student.id)
+        # Add student to shortlist using controller function
+        addToShortlist(staff.id, position.id, student.id)
         
-        # Employer accepts student
-        result = employer.acceptReject(student.id, position.id, "accepted", "Welcome!")
+        # Employer accepts student using controller function
+        result = acceptReject(employer.id, student.id, position.id, "accepted", "Welcome!")
         assert result == True
         
         # Verify status changed
@@ -380,10 +379,10 @@ class WorkflowIntegrationTests(unittest.TestCase):
         student2 = create_student("bob", "pass", "FST", "DCIT", "BSc IT", 3.6)
         student3 = create_student("charlie", "pass", "FST", "DCIT", "BSc CS", 3.9)
         
-        # Add all to shortlist
-        staff.addToShortlist(position.id, student1.id)
-        staff.addToShortlist(position.id, student2.id)
-        staff.addToShortlist(position.id, student3.id)
+        # Add all to shortlist using controller function
+        addToShortlist(staff.id, position.id, student1.id)
+        addToShortlist(staff.id, position.id, student2.id)
+        addToShortlist(staff.id, position.id, student3.id)
         
         # Verify all added
         shortlist = view_position_shortlist(position.id)
