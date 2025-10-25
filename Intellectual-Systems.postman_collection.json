@@ -1,16 +1,14 @@
 {
 	"info": {
-		"_postman_id": "42549608-4eee40c4-dabf-4e17-bc91-2269e22e9b4b",
+		"_postman_id": "4eee40c4-dabf-4e17-bc91-2269e22e9b4b",
 		"name": "Intellectual-Systems",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42549608",
+		"_collection_link": "https://intellectual-systems.postman.co/workspace/39aeeecd-041b-421c-841f-fca847043629/collection/42549608-4eee40c4-dabf-4e17-bc91-2269e22e9b4b?action=share&source=collection_link&creator=42549608"
 	},
 	"item": [
 		{
 			"name": "Root",
-			"id": "42549608-73322220-25a1-4970-8b9c-68e595e33e75",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -29,7 +27,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2516b48d-7d6d-4b1e-983c-05345c4c5586",
 						"exec": [
 							"pm.test(\"Content-Type header is application/json\", () => {\r",
 							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
@@ -58,10 +55,6 @@
 					}
 				}
 			],
-			"id": "42549608-4630ec10-c4fc-41c1-b33b-688bffaa4b41",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -83,7 +76,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1882e906-b393-4368-bb02-a26a69031eb9",
 						"exec": [
 							"let { username, password} = JSON.parse(pm.request.body.raw);",
 							"",
@@ -117,7 +109,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "368defa5-61ed-4fca-aafe-fbba0ca7d766",
 						"exec": [
 							""
 						],
@@ -127,10 +118,6 @@
 					}
 				}
 			],
-			"id": "42549608-abb336b4-b55b-457f-95bb-eb3801da7203",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [
@@ -163,21 +150,20 @@
 			},
 			"response": [
 				{
-					"id": "42549608-bd864e7c-e5ce-4525-aa19-987f2dc268db",
 					"name": "Sign Up - Success",
 					"originalRequest": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
 								"value": "application/json",
+								"name": "Content-Type",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"{{$randomUserName}}\",\n\t\"email\": \"{{$randomEmail}}\",\n\t\"password\": \"{{$randomPassword}}\"\n}",
+							"raw": "{\n\t\"username\": \"Margot77\",\n\t\"email\": \"Lewis_Jacobson17@yahoo.com\",\n\t\"password\": \"Fzy1t3S3RJvs2sE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,10 +171,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/signup",
-							"host": [
-								"{{host}}"
-							],
+							"raw": "/signup",
 							"path": [
 								"signup"
 							]
@@ -220,7 +203,6 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": null,
 					"body": "{\n    \"message\": \"Jennings.Goodwin created\"\n}"
 				}
 			]
@@ -231,7 +213,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4dd6f25f-fb2a-435c-ba86-801dfb356ba4",
 						"exec": [
 							"pm.test(\"Returned Access Token\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -249,7 +230,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "42d33f6e-f97c-4214-ace3-a0291b1f827c",
 						"exec": [
 							""
 						],
@@ -259,10 +239,6 @@
 					}
 				}
 			],
-			"id": "42549608-beea6f26-44e9-48b7-99ab-aa01534ac4e5",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -298,7 +274,6 @@
 			},
 			"response": [
 				{
-					"id": "42549608-c97a583c-1cc6-4534-a016-8eb36964ac4c",
 					"name": "Login - Success",
 					"originalRequest": {
 						"method": "POST",
@@ -311,7 +286,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"username\": \"{{username}}\",\r\n\t\"password\": \"{{password}}\"\r\n}",
+							"raw": "{\r\n\t\"username\": \"\",\r\n\t\"password\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,10 +294,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/login",
-							"host": [
-								"{{host}}"
-							],
+							"raw": "/login",
 							"path": [
 								"login"
 							]
@@ -354,7 +326,6 @@
 						}
 					],
 					"cookie": [],
-					"responseTime": null,
 					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQyNjM1OCwianRpIjoiYzE4ODBjNjEtYjg4Ny00Mzk3LWE4YTQtNzk5M2U1MjU4MjdmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ikplbm5pbmdzLkdvb2R3aW4iLCJuYmYiOjE3MDk0MjYzNTgsImV4cCI6MTcwOTQ4MDM1OH0.I7MDJf8BRwuvzCX0O8rDEocJXsv7yHx3E8BNwUw8PYw\"\n}"
 				}
 			]
@@ -365,7 +336,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b3813f70-7234-4083-bec8-5d20fbd3a1c8",
 						"exec": [
 							"var schema = {\r",
 							"    \"type\": \"object\",\r",
@@ -429,7 +399,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "221b6bb6-6a38-4051-ba71-abe3bf0b4d89",
 						"exec": [
 							""
 						],
@@ -439,10 +408,6 @@
 					}
 				}
 			],
-			"id": "42549608-3220968a-8a9a-4783-bb60-383d13cf105c",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -464,7 +429,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a34e20e1-d61f-471c-be9e-12f47d7068d5",
 						"exec": [
 							"let { username, password, companyName} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -493,10 +457,6 @@
 					}
 				}
 			],
-			"id": "42549608-791c7890-95fc-4985-b4cd-1663e7564e69",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -527,7 +487,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ce8dab7e-5b2e-4218-be5f-a75088e60a04",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -557,10 +516,6 @@
 					}
 				}
 			],
-			"id": "42549608-56d92c61-e5f6-48ac-98d0-f0229bd3dbb8",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -582,7 +537,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "db429e79-eb1c-4c3a-915f-44f473e39ef0",
 						"exec": [
 							"let { employerID, positionTitle, department, description} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -612,10 +566,6 @@
 					}
 				}
 			],
-			"id": "42549608-04ce0b74-f526-448a-b8f1-4e4f1ca5200f",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -646,7 +596,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dca410f4-df70-4a09-9e98-e005f2a6043a",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -683,10 +632,6 @@
 					}
 				}
 			],
-			"id": "42549608-1795730c-ffc0-4b9e-b670-1b06466f616e",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -708,7 +653,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "94ff8151-da3c-417c-bc7a-a648e9c783b5",
 						"exec": [
 							"let { username, password, employerID} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -737,10 +681,6 @@
 					}
 				}
 			],
-			"id": "42549608-96386822-43d8-427d-9239-31adaf36da99",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -771,7 +711,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "2073599a-2f6f-43d8-af0c-8da4da8d3938",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -801,10 +740,6 @@
 					}
 				}
 			],
-			"id": "42549608-62174a9b-3239-418e-b713-8aaec28e59f6",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -826,7 +761,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1774eb93-f23a-4b24-bbd5-434b87f46d9e",
 						"exec": [
 							"let { username, password, faculty, department, degree, gpa} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -858,10 +792,6 @@
 					}
 				}
 			],
-			"id": "42549608-64cacd57-26ed-4ac8-9739-e67ca05c51fa",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -892,7 +822,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "d02aa937-9309-42e7-8f42-dd510e0bc314",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -925,10 +854,6 @@
 					}
 				}
 			],
-			"id": "42549608-faca7625-9eb3-40a5-93c7-0e67f4e679c7",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -950,7 +875,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ca830136-b025-43b8-b7ef-91e1089bc890",
 						"exec": [
 							"let { staffID, studentID, positionID} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -980,10 +904,6 @@
 					}
 				}
 			],
-			"id": "42549608-9ebab707-cd8a-497a-b0d1-209b67455d49",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -1014,7 +934,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "511e762f-4db6-49c5-ba95-d8cd8ff91cdd",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -1045,10 +964,6 @@
 					}
 				}
 			],
-			"id": "42549608-7367830e-f450-4097-9f11-fbe49f1c28af",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -1070,7 +985,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ab808f20-4ee3-4d2f-af86-4e1bf750c14a",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -1106,10 +1020,6 @@
 					}
 				}
 			],
-			"id": "42549608-521a76a2-efb4-43fd-805c-dd107bbe512b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -1132,7 +1042,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "6eaaa203-2fb2-4872-9a37-b970191d64a2",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -1163,10 +1072,6 @@
 					}
 				}
 			],
-			"id": "42549608-09dacd0f-cc64-4e72-a2b1-be4ca020e3e1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -1189,7 +1094,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "40e5da07-55f8-40f3-9fb6-394f24c1c0ee",
 						"exec": [
 							"let { employerID, positionID, studentID, status, msg} = JSON.parse(pm.request.body.raw);\r",
 							"\r",
@@ -1221,10 +1125,6 @@
 					}
 				}
 			],
-			"id": "42549608-5eaafa8c-834a-458e-9dad-210775c476f1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -1255,7 +1155,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a473726b-2bcf-4a5f-a5d1-d32e7a47971c",
 						"exec": [
 							"var schema = {\r",
 							"  \"type\": \"array\",\r",
@@ -1286,10 +1185,6 @@
 					}
 				}
 			],
-			"id": "42549608-d33a1185-5310-44e6-8b6a-e3829a08a1e2",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -1311,7 +1206,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "48db86cf-725c-4833-ba81-3a5741002827",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -1323,7 +1217,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "0e1d788e-b76e-4bc1-ae18-9af796681505",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
