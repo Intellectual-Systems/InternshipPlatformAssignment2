@@ -1127,7 +1127,7 @@
 			"response": []
 		},
 		{
-			"name": "(View Position Shortlist",
+			"name": "(Employer) View Position Shortlist",
 			"event": [
 				{
 					"listen": "test",
