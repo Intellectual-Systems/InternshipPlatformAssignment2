@@ -945,7 +945,7 @@
 			"response": []
 		},
 		{
-			"name": "Enroll Student",
+			"name": "(Staff) Enroll Student",
 			"event": [
 				{
 					"listen": "test",
