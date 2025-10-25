@@ -1090,13 +1090,63 @@
 		},
 		{
 			"name": "View Employer Positions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab808f20-4ee3-4d2f-af86-4e1bf750c14a",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-521a76a2-efb4-43fd-805c-dd107bbe512b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-emp-pos/{{employerID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-emp-pos",
+						"{{employerID}}"
+					]
+				}
 			},
 			"response": []
 		},
