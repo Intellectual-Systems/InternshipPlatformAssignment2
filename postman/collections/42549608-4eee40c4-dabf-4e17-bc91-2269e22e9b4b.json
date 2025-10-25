@@ -1065,7 +1065,7 @@
 			"response": []
 		},
 		{
-			"name": "(Staff) View Employer Positions",
+			"name": "(Employer) View Employer Positions",
 			"event": [
 				{
 					"listen": "test",
