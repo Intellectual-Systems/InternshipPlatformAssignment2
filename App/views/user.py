@@ -197,9 +197,8 @@ def create_student_action():
 @jwt_required()
 def enroll_student_action():
     data = request.json
-    sta = db.session.query(Staff).filter_by(id=data['staffID']).first()
-    addToShortlist(sta.id,data['positionID'], data['studentID'])
-    
+    addToShortlist(data['staffID'], data['positionID'], data['studentID'])
+
     return jsonify({'message': f"Student {data['studentID']} shortlisted for position {data['positionID']} by staff {data['staffID']} successfully"}), 201
 
 # Viwes shortlists for a specified student
