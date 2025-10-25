@@ -1117,7 +1117,7 @@
 							"\r",
 							"\r",
 							"pm.test(\r",
-							"    `Positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    `Employer positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
 							"    function() {\r",
 							"        var jsonData = pm.response.json();\r",
 							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
