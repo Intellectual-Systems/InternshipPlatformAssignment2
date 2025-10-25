@@ -1158,7 +1158,17 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-pos-sho/{{positionID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-pos-sho",
+						"{{positionID}}"
+					]
+				}
 			},
 			"response": []
 		},
