@@ -945,7 +945,7 @@
 			"response": []
 		},
 		{
-			"name": "Enroll Student",
+			"name": "(Staff) Enroll Student",
 			"event": [
 				{
 					"listen": "test",
@@ -1009,7 +1009,7 @@
 			"response": []
 		},
 		{
-			"name": "List Shortlists",
+			"name": "(Staff) List Shortlists",
 			"event": [
 				{
 					"listen": "test",
@@ -1065,7 +1065,7 @@
 			"response": []
 		},
 		{
-			"name": "View Employer Positions",
+			"name": "(Employer) View Employer Positions",
 			"event": [
 				{
 					"listen": "test",
@@ -1127,7 +1127,7 @@
 			"response": []
 		},
 		{
-			"name": "View Position Shortlist",
+			"name": "(Employer) View Position Shortlist",
 			"event": [
 				{
 					"listen": "test",
@@ -1184,7 +1184,7 @@
 			"response": []
 		},
 		{
-			"name": "Accept/Reject Student",
+			"name": "(Employer) Accept/Reject Student",
 			"event": [
 				{
 					"listen": "test",
@@ -1250,7 +1250,7 @@
 			"response": []
 		},
 		{
-			"name": "View Student Shortlists",
+			"name": "(Student) View Student Shortlists",
 			"event": [
 				{
 					"listen": "test",
