@@ -1201,7 +1201,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "20b0c696-1843-4b20-9437-d69217feb113",
+				"id": "fdb544a1-d9c2-4881-853c-489c401ce2ad",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -1213,7 +1213,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "50999ed6-6d87-4e29-af20-58c55db39b1e",
+				"id": "1adb2a92-069c-4f57-a5e1-a0a7ea3757a9",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -1279,6 +1279,11 @@
 		{
 			"key": "positionID",
 			"value": ""
+		},
+		{
+			"key": "status",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
