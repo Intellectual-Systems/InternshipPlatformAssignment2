@@ -1009,7 +1009,7 @@
 			"response": []
 		},
 		{
-			"name": "List Shortlists",
+			"name": "(Staff) List Shortlists",
 			"event": [
 				{
 					"listen": "test",
