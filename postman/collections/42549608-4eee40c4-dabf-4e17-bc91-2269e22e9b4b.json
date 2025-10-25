@@ -1114,13 +1114,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/view-emp-pos/{{employerID}}",
+					"raw": "{{host}}/view-emp-pos/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"view-emp-pos",
-						"{{employerID}}"
+						"1"
 					]
 				}
 			},
@@ -1128,6 +1128,46 @@
 		},
 		{
 			"name": "View Position Shortlist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eaaa203-2fb2-4872-9a37-b970191d64a2",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-09dacd0f-cc64-4e72-a2b1-be4ca020e3e1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1136,13 +1176,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/view-pos-sho/{{positionID}}",
+					"raw": "{{host}}/view-pos-sho/1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"view-pos-sho",
-						"{{positionID}}"
+						"1"
 					]
 				}
 			},
