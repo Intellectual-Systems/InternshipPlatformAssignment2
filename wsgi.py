@@ -512,6 +512,28 @@ def browse_positions_command():
         print("")
 app.cli.add_command(student_cli)
 
+'''
+Position Commands
+'''
+
+position_cli = AppGroup('position', help='Position object commands')
+
+@position_cli.command("list", help="Lists all positions")
+def list_positions_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions found.\n")
+        return
+    
+    print("\n=== All Positions ===\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle}")
+        print(f"  Company: {employer.companyName if employer else 'Unknown'}")
+        print(f"  Department: {pos.department}")
+        print(f"  Description: {pos.description}\n")
+
+
 # '''
 # Test Commands
 # '''
@@ -561,3 +583,4 @@ def employer_tests_command(type):
         return; 
 
 app.cli.add_command(test)
+
