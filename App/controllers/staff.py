@@ -24,6 +24,8 @@ def get_all_staff():
 
 def addToShortlist(staffID, positionID, studentID):
         staff = Staff.query.filter_by(id=staffID).first()
+        if not staff:
+            return False
         position = InternshipPosition.query.filter_by(id=positionID).first()
         student = Student.query.filter_by(id=studentID).first()
 

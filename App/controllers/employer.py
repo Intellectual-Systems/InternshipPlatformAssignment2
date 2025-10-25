@@ -39,7 +39,10 @@ def create_position(employerID, positionTitle, department, description):
     db.session.commit()
     return pos
 
-def acceptReject(self, studentID, positionID, status, message=None):
+def acceptReject(employerID, studentID, positionID, status, message=None):
+    emp = Employer.query.filter_by(id=employerID).first()
+    if not emp:
+        return False
     sp = Student_Position.query.filter_by(studentID=studentID, positionID=positionID).first()
     if sp:
         sp.status = status

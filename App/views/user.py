@@ -31,7 +31,6 @@ def get_user_page():
     return render_template('users.html', users=users)
 
 @user_views.route('/users', methods=['POST'])
-@jwt_required()
 def create_user_action():
     data = request.form
     flash(f"User {data['username']} created!")
@@ -45,7 +44,6 @@ def get_users_action():
     return jsonify(users)
 
 @user_views.route('/api/users', methods=['POST'])
-@jwt_required()
 def create_user_endpoint():
     data = request.json
     user = create_user(data['username'], data['password'])
@@ -118,16 +116,17 @@ def create_employer_action():
 
 # View positions for a specified employer
 
-@user_views.route('/view-emp-pos', methods=['POST'])
+@user_views.route('/view-emp-pos/<int:employer_id>', methods=['GET'])
 @jwt_required()
-def view_employer_positions_action():
-    data = request.json
-    emp = db.session.query(Employer).filter_by(id=data['employerID']).first()
+def view_employer_positions_action(employer_id):
+    emp = db.session.query(Employer).filter_by(id=employer_id).first()
 
-    if not emp.id:
-        return jsonify({'message': f"Employer with id {data['employerID']} not found"}), 404
+    if not emp:
+        return jsonify({'message': f"Employer with id {employer_id} not found"}), 404
 
     positions = view_positions(emp.id)
+    if(not positions):
+        return jsonify({'message': f"No positions found for employer with id {employer_id}"}), 404
     return jsonify([pos.get_json() for pos in positions])
 
 # Accepts or rejects a student for a specified position and employer
@@ -136,17 +135,21 @@ def view_employer_positions_action():
 @jwt_required()
 def accept_reject_action():
     data = request.json
-    emp = db.session.query(Employer).filter_by(id=data['employerID']).first()
-    if not emp:
-        return jsonify({'message': f"Employer with id {data['employerID']} not found"}), 404
+    employer_id = data.get('employerID')
+    position_id = data.get('positionID')
+    student_id = data.get('studentID')
+    status = data.get('status')
+    msg = data.get('msg', None)
 
-    success = emp.acceptReject(data['studentID'], data['positionID'], data['status'], data.get('message'))
+    emp = db.session.query(Employer).filter_by(id=employer_id).first()
+
+    success = acceptReject(employer_id, student_id, position_id, status, msg)
     if success:
         db.session.add(emp)
         db.session.commit()
-        return jsonify({'message': f"Student {data['studentID']} has been {data['status']} for position {data['positionID']} by employer {data['employerID']}"}), 200
+        return jsonify({'message': f"Student {student_id} has been {status} for position {position_id} by employer {employer_id}"}), 201
     else:
-        return jsonify({'message': f"Shortlist entry for student {data['studentID']} and position {data['positionID']} not found"}), 404
+        return jsonify({'message': f"Shortlist entry for student {student_id} and position {position_id} not found"}), 404
 
 # Creates a position using the specified attributes which includes the employer's id
 
@@ -159,16 +162,17 @@ def create_position_action():
 
 # View shortlist for a specified position
 
-@user_views.route('/view-pos-sho', methods=['POST'])
+@user_views.route('/view-pos-sho/<int:position_id>', methods=['GET'])
 @jwt_required()
-def view_position_shortlist_action():
-    data = request.json
-    pos = db.session.query(InternshipPosition).filter_by(id=data['positionID']).first()
+def view_position_shortlist_action(position_id):
+    pos = db.session.query(InternshipPosition).filter_by(id=position_id).first()
 
     if not pos:
-        return jsonify({'message': f"Position with id {data['positionID']} not found"}), 404
+        return jsonify({'message': f"Position with id {position_id} not found"}), 404
 
-    shortlist = view_position_shortlist(data['positionID'])
+    shortlist = view_position_shortlist(position_id)
+    if(not shortlist):
+        return jsonify({'message': f"No shortlist found for position with id {position_id}"}), 404
     return jsonify([sho.get_json() for sho in shortlist])
 
 # Creates a staff using the specified attributes which includes the employer's id
@@ -201,16 +205,17 @@ def enroll_student_action():
 
     return jsonify({'message': f"Student {data['studentID']} shortlisted for position {data['positionID']} by staff {data['staffID']} successfully"}), 201
 
-# Viwes shortlists for a specified student
+# Views shortlists for a specified student
 
-@user_views.route('/view-std-sho', methods=['POST'])
+@user_views.route('/view-std-sho/<int:student_id>', methods=['GET'])
 @jwt_required()
-def view_student_shortlists_action():
-    data = request.json
-    stu = db.session.query(Student).filter_by(id=data['studentID']).first()
+def view_student_shortlists_action(student_id):
+    stu = db.session.query(Student).filter_by(id=student_id).first()
 
     if not stu:
-        return jsonify({'message': f"Student with id {data['studentID']} not found"}), 404
+        return jsonify({'message': f"Student with id {student_id} not found"}), 404
 
-    shortlists = db.session.query(Student_Position).filter_by(studentID=data['studentID']).all()
+    shortlists = db.session.query(Student_Position).filter_by(studentID=student_id).all()
+    if(not shortlists):
+        return jsonify({'message': f"No shortlists found for student with id {student_id}"}), 404
     return jsonify([sho.get_json() for sho in shortlists])
