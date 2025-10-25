@@ -1171,6 +1171,49 @@
 		},
 		{
 			"name": "Accept/Reject Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40e5da07-55f8-40f3-9fb6-394f24c1c0ee",
+						"exec": [
+							"let { employerID, positionID, studentID, status, meassage} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"pm.collectionVariables.set(\"positionID\", positionID);\r",
+							"pm.collectionVariables.set(\"studentID\", studentID);\r",
+							"pm.collectionVariables.set(\"status\", status);\r",
+							"pm.collectionVariables.set(\"message\", message);\r",
+							"\r",
+							"// {\r",
+							"//     \"employerID\": \"2\",\r",
+							"//     \"positionID\": \"3\",\r",
+							"//     \"studentID\": \"2\",\r",
+							"//     \"status\": \"accepted\",\r",
+							"//     \"message\": \"Congrats\"\r",
+							"// }\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with student <studentID> has been <status> for position <positionID> by employer <employerID>\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${studentID} has been ${status} for position ${positionID} by employer ${employerID}`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-5eaafa8c-834a-458e-9dad-210775c476f1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1216,7 +1259,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "fdb544a1-d9c2-4881-853c-489c401ce2ad",
+				"id": "48db86cf-725c-4833-ba81-3a5741002827",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -1228,7 +1271,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "1adb2a92-069c-4f57-a5e1-a0a7ea3757a9",
+				"id": "0e1d788e-b76e-4bc1-ae18-9af796681505",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -1297,8 +1340,7 @@
 		},
 		{
 			"key": "status",
-			"value": "",
-			"type": "default"
+			"value": ""
 		}
 	]
 }
