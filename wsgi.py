@@ -533,6 +533,36 @@ def list_positions_command():
         print(f"  Department: {pos.department}")
         print(f"  Description: {pos.description}\n")
 
+@position_cli.command("view", help="View a specific position")
+def view_position_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions available.\n")
+        return
+    
+    print("\nAvailable Positions:\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle} - {employer.companyName if employer else 'Unknown'}")
+    
+    pos_id = input("\nEnter position ID: ")
+    position = get_position_by_id(pos_id)
+    
+    if not position:
+        print(f"\nPosition {pos_id} not found.\n")
+        return
+    
+    employer = get_employer_by_id(position.employerID)
+    shortlist = view_position_shortlist(pos_id)
+    
+    print(f"\n=== Position Details ===")
+    print(f"Title: {position.positionTitle}")
+    print(f"Company: {employer.companyName if employer else 'Unknown'}")
+    print(f"Department: {position.department}")
+    print(f"Description: {position.description}")
+    print(f"Shortlisted Students: {len(shortlist) if shortlist else 0}\n")
+
+app.cli.add_command(position_cli)
 
 # '''
 # Test Commands
