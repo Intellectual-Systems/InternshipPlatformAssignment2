@@ -1250,7 +1250,7 @@
 			"response": []
 		},
 		{
-			"name": "View Student Shortlists",
+			"name": "(Student) View Student Shortlists",
 			"event": [
 				{
 					"listen": "test",
