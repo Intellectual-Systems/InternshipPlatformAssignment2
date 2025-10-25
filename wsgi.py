@@ -437,6 +437,25 @@ def view_shortlists_command():
         print('No shortlists found for this student.')
     print("")
 
+@student_cli.command("browse-positions", help="Browse available positions")
+def browse_positions_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions available.\n")
+        return
+    
+    print("\n=== Available Positions ===\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle}")
+        print(f"  Company: {employer.companyName if employer else 'Unknown'}")
+        print(f"  Department: {pos.department}")
+        print(f"  Description: {pos.description}")
+        
+        # Show number of applicants
+        shortlist = view_position_shortlist(pos.id)
+        print(f"  Applicants: {len(shortlist) if shortlist else 0}")
+        print("")
 app.cli.add_command(student_cli)
 
 # '''
