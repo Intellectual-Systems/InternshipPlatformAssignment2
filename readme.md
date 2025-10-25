@@ -1,17 +1,5 @@
 <div align=justify>
 
-# Development Notes
-
-## Recent Changes
-
-- Added jwt_required() to all routes to restrict them to authorised users only
-
-- Changes can be found in views/user.py
-
-## Next Tasks
-
-- Complete tests
-
 # Notes
 
 - Sample data for each table has been created. Use command 'flask list' to list data for all tables

@@ -1,0 +1,1295 @@
+{
+	"info": {
+		"_postman_id": "4eee40c4-dabf-4e17-bc91-2269e22e9b4b",
+		"name": "Intellectual-Systems",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42549608",
+		"_collection_link": "https://intellectual-systems.postman.co/workspace/39aeeecd-041b-421c-841f-fca847043629/collection/42549608-4eee40c4-dabf-4e17-bc91-2269e22e9b4b?action=share&source=collection_link&creator=42549608"
+	},
+	"item": [
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initialize App",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+							"});\r",
+							"\r",
+							"if(pm.response.headers.get('Content-Type') == 'application/json'){\r",
+							"\r",
+							"\tconst {message} = pm.response.json();\r",
+							"\r",
+							"\tpm.test(\"Should return the message 'Database Initialized!'\", function () {\r",
+							"\t\t\tpm.expect(message).to.eql('Database Initialized!');\r",
+							"\t\t}\r",
+							"\t);\r",
+							"\r",
+							"\tpm.test(\"Should have the correct status code\", function () {\r",
+							"\t\t\r",
+							"\t\tpm.expect(pm.response.code).to.eql(200);\r",
+							"\t\t\r",
+							"\t});\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/init",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { username, password} = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.collectionVariables.set('username', username);",
+							"pm.collectionVariables.set('password', password);",
+							"",
+							"pm.test(",
+							"\t\"Should respond with <username> created message\", ",
+							"\tfunction () {",
+							"\t\tlet { message } = pm.response.json();",
+							"    \tpm.expect(message).to.eql(`${username} created`);",
+							"\t}",
+							");",
+							"",
+							"pm.test(",
+							"\t\"Should respond with the correct status\", ",
+							"\tfunction () {",
+							"\t\tpm.response.to.have.status(201);",
+							"\t}",
+							");",
+							"",
+							"",
+							"// let { error, message } = pm.response.json();",
+							"// \tpm.expect(error ?? message).to.be.oneOf([\"username or email already exists\", \"user created\"]);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{$randomUserName}}\",\n\t\"password\": \"{{$randomPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "Allows the user to create a user account returns an appropriate message and status."
+			},
+			"response": [
+				{
+					"name": "Sign Up - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "Content-Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"Margot77\",\n\t\"email\": \"Lewis_Jacobson17@yahoo.com\",\n\t\"password\": \"Fzy1t3S3RJvs2sE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/signup",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "44"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Mar 2024 00:33:57 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.8.16"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Jennings.Goodwin created\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Login - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returned Access Token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set('access_token', jsonData['access_token']) ",
+							"});",
+							"",
+							"",
+							"   "
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"{{username}}\",\r\n\t\"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Allows a user to login and recieve their token"
+			},
+			"response": [
+				{
+					"name": "Login - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"\",\r\n\t\"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/login",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "309"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Mar 2024 00:39:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.8.16"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTQyNjM1OCwianRpIjoiYzE4ODBjNjEtYjg4Ny00Mzk3LWE4YTQtNzk5M2U1MjU4MjdmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ikplbm5pbmdzLkdvb2R3aW4iLCJuYmYiOjE3MDk0MjYzNTgsImV4cCI6MTcwOTQ4MDM1OH0.I7MDJf8BRwuvzCX0O8rDEocJXsv7yHx3E8BNwUw8PYw\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employers\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\" : {\r",
+							"                \"type\" : \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"companyName\": { \"type\": \"string\" },\r",
+							"                    \"id\": { \"type\": \"number\" },\r",
+							"                    \"username\": { \"type\": \"string\" }\r",
+							"                }\r",
+							"            }\r",
+							"        },\r",
+							"        \"staff\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"employerID\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                }\r",
+							"               \r",
+							"            }\r",
+							"        },\r",
+							"        \"students\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"items\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"degree\": { \"type\": \"string\" },\r",
+							"                    \"department\": { \"type\": \"string\" },\r",
+							"                    \"faculty\": { \"type\": \"string\" },\r",
+							"                    \"gpa\": { \"type\": \"number\" },\r",
+							"                    \"id\":{\"type\":\"number\"},\r",
+							"                    \"username\":{\"type\":\"string\"}\r",
+							"                }\r",
+							"                \r",
+							"            }\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [  ],\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Users should have an employers, staff and students with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}} /list",
+					"host": [
+						"{{host}} "
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { username, password, companyName} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set('username', username);\r",
+							"pm.collectionVariables.set('password', password);\r",
+							"pm.collectionVariables.set('companyName', companyName);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Employer ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"dick\",\r\n    \"password\" : \"dickpass\",\r\n    \"companyName\" : \"DickCorp\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-emp",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-emp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Employers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"companyName\":{\"type\":\"string\"},\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"companyName\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer should have an companyName, id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-emp",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-emp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { employerID, positionTitle, department, description} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"pm.collectionVariables.set(\"positionTitle\", positionTitle);\r",
+							"pm.collectionVariables.set(\"department\", department);\r",
+							"pm.collectionVariables.set(\"description\", description);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <positionTitle> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Position ${positionTitle} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employerID\" : 13,\r\n    \"positionTitle\" : \"IT Intern\",\r\n    \"department\" : \"IT\",\r\n    \"description\" : \"Address technical issues\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-pos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-pos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Positions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-pos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-pos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { username, password, employerID} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"username\", username);\r",
+							"pm.collectionVariables.set(\"password\", password);\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Staff ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"duck\",\r\n    \"password\" : \"duckpass\",\r\n    \"employerID\" : 13\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-sta",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-sta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Staff",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employerID\": { \"type\": \"number\" },\r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"username\":{\"type\":\"string\"}\r",
+							"    },\r",
+							"    \"required\": [ \"employerID\", \"id\", \"username\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Staff should have an employerID, id and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-sta",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-sta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { username, password, faculty, department, degree, gpa} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"username\", username);\r",
+							"pm.collectionVariables.set(\"password\", password);\r",
+							"pm.collectionVariables.set(\"faculty\", faculty);\r",
+							"pm.collectionVariables.set(\"department\", department);\r",
+							"pm.collectionVariables.set(\"degree\", degree);\r",
+							"pm.collectionVariables.set(\"gpa\", gpa);\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with <username> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${username} created`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"jack\",\r\n    \"password\" : \"jackpass\",\r\n    \"faculty\" : \"FST\",\r\n    \"department\" : \"DCIT\",\r\n    \"degree\" : \"BSc. Computer Science Major\",\r\n    \"gpa\" : 3.9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/create-std",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"create-std"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"degree\": { \"type\": \"string\" },\r",
+							"        \"department\": { \"type\": \"string\" },\r",
+							"        \"faculty\": { \"type\": \"string\" },\r",
+							"        \"gpa\": { \"type\": \"number\" },\r",
+							"        \"id\": { \"type\": \"number\" },\r",
+							"        \"username\": { \"type\": \"string\" }\r",
+							"    },\r",
+							"      \"required\": [\"degree\", \"department\", \"faculty\", \"gpa\", \"id\", \"username\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Student should have a degree, department, faculty, gpa, ID and username with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-std",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-std"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Staff) Enroll Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { staffID, studentID, positionID} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"staffID\", staffID);\r",
+							"pm.collectionVariables.set(\"studentID\", studentID);\r",
+							"pm.collectionVariables.set(\"positionID\", positionID);\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with student <studentID> shorlisted for position <positionID> by staff <staffID> created message\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${studentID} shortlisted for position ${positionID} by staff ${staffID} successfully`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"staffID\" : 14,\r\n    \"studentID\" : 15,\r\n    \"positionID\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/enroll",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"enroll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Staff) List Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"number\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"number\" }\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Staff should have employer_response, positionID, status and studentID with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list-sho",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list-sho"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Employer) View Employer Positions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-emp-pos/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-emp-pos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Employer) View Position Shortlist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\" : {\"type\": \"string\"},\r",
+							"        \"positionID\" : {\"type\": \"integer\"},\r",
+							"        \"status\" : {\"type\": \"string\"},\r",
+							"        \"studentID\" : {\"type\": \"integer\"}\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer response for {positionID} by {studentID} is {employer_response}`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-pos-sho/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-pos-sho",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Employer) Accept/Reject Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let { employerID, positionID, studentID, status, msg} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"pm.collectionVariables.set(\"positionID\", positionID);\r",
+							"pm.collectionVariables.set(\"studentID\", studentID);\r",
+							"pm.collectionVariables.set(\"status\", status);\r",
+							"pm.collectionVariables.set(\"message\", msg);\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with student <studentID> has been <status> for position <positionID> by employer <employerID>\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${studentID} has been ${status} for position ${positionID} by employer ${employerID}`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employerID\": \"1\",\r\n    \"positionID\": \"1\",\r\n    \"studentID\": \"8\",\r\n    \"status\": \"accepted\",\r\n    \"msg\": \"Congrats\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/accept-reject",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"accept-reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Student) View Student Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"integer\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"integer\" }\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Student {{studentID}} has correct application data`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-std-sho/{{studentID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-std-sho",
+						"{{studentID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "companyName",
+			"value": ""
+		},
+		{
+			"key": "employerID",
+			"value": ""
+		},
+		{
+			"key": "positionTitle",
+			"value": ""
+		},
+		{
+			"key": "department",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "faculty",
+			"value": ""
+		},
+		{
+			"key": "degree",
+			"value": ""
+		},
+		{
+			"key": "gpa",
+			"value": ""
+		},
+		{
+			"key": "staffID",
+			"value": ""
+		},
+		{
+			"key": "studentID",
+			"value": ""
+		},
+		{
+			"key": "positionID",
+			"value": ""
+		},
+		{
+			"key": "status",
+			"value": ""
+		},
+		{
+			"key": "message",
+			"value": ""
+		}
+	]
+}
