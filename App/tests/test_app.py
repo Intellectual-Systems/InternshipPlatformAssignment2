@@ -22,8 +22,7 @@ from App.controllers.employer import (
     get_employer_by_id,
     get_all_employers,
     view_positions,
-    view_position_shortlist,
-    create_position as employer_create_position
+    view_position_shortlist
 )
 from App.controllers.staff import (
     create_staff,
