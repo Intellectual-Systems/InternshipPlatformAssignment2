@@ -381,6 +381,27 @@
 			"response": []
 		},
 		{
+			"name": "Get users Copy",
+			"id": "42549608-5e8523ce-e1ce-4760-81f5-a4710dac2dce",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "List Users",
 			"event": [
 				{
