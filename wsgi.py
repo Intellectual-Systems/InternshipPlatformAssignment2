@@ -375,6 +375,60 @@ def add_to_shortlist_command():
     else:
         print('\nFailed to add student to shortlist.')
 
+@staff_cli.command("remove-from-shortlist", help="Remove a student from a position's shortlist")
+def remove_from_shortlist_command():
+    print("\nStaff:\n")
+    staff = get_all_staff()
+    for sta in staff:
+        print(f'ID: {sta.id} | Name: {sta.username}')
+    
+    staff_id = input('\nEnter staff ID: ')
+    staff_member = get_staff_by_id(staff_id)
+    if not staff_member:
+        print('Staff not found.')
+        return
+
+    print("\nPositions:\n")
+    positions = InternshipPosition.query.filter_by(employerID=staff_member.employerID).all()
+    if not positions:
+        print('No positions found for this employer.')
+        return
+    
+    for pos in positions:
+        print(f'ID: {pos.id} | Title: {pos.positionTitle}')
+    
+    position_id = input('\nEnter position ID: ')
+    position = get_position_by_id(position_id)
+    if not position:
+        print('Position not found.')
+        return
+
+    print("\nShortlisted Students:\n")
+    shortlist = view_position_shortlist(position_id)
+    if not shortlist:
+        print('No students in the shortlist for this position.')
+        return
+    
+    for sp in shortlist:
+        student = get_student_by_id(sp.studentID)
+        print(f'ID: {student.id} | Name: {student.username} | Status: {sp.status}')
+    
+    student_id = input('\nEnter student ID to remove: ')
+    
+    sp = Student_Position.query.filter_by(studentID=student_id, positionID=position_id).first()
+    if not sp:
+        print('\nStudent not found in this position\'s shortlist.')
+        return
+    
+    confirm = input(f'\nAre you sure you want to remove this student from the shortlist? (y/n): ')
+    if confirm.lower() != 'y':
+        print('Action cancelled.')
+        return
+    
+    db.session.delete(sp)
+    db.session.commit()
+    print(f'\nStudent removed from shortlist successfully.\n')
+
 app.cli.add_command(staff_cli)
 
 '''
@@ -437,7 +491,117 @@ def view_shortlists_command():
         print('No shortlists found for this student.')
     print("")
 
+@student_cli.command("browse-positions", help="Browse available positions")
+def browse_positions_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions available.\n")
+        return
+    
+    print("\n=== Available Positions ===\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle}")
+        print(f"  Company: {employer.companyName if employer else 'Unknown'}")
+        print(f"  Department: {pos.department}")
+        print(f"  Description: {pos.description}")
+        
+        # Show number of applicants
+        shortlist = view_position_shortlist(pos.id)
+        print(f"  Applicants: {len(shortlist) if shortlist else 0}")
+        print("")
 app.cli.add_command(student_cli)
+
+'''
+Position Commands
+'''
+
+position_cli = AppGroup('position', help='Position object commands')
+
+@position_cli.command("list", help="Lists all positions")
+def list_positions_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions found.\n")
+        return
+    
+    print("\n=== All Positions ===\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle}")
+        print(f"  Company: {employer.companyName if employer else 'Unknown'}")
+        print(f"  Department: {pos.department}")
+        print(f"  Description: {pos.description}\n")
+
+@position_cli.command("view", help="View a specific position")
+def view_position_command():
+    positions = get_all_positions()
+    if not positions:
+        print("\nNo positions available.\n")
+        return
+    
+    print("\nAvailable Positions:\n")
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle} - {employer.companyName if employer else 'Unknown'}")
+    
+    pos_id = input("\nEnter position ID: ")
+    position = get_position_by_id(pos_id)
+    
+    if not position:
+        print(f"\nPosition {pos_id} not found.\n")
+        return
+    
+    employer = get_employer_by_id(position.employerID)
+    shortlist = view_position_shortlist(pos_id)
+    
+    print(f"\n=== Position Details ===")
+    print(f"Title: {position.positionTitle}")
+    print(f"Company: {employer.companyName if employer else 'Unknown'}")
+    print(f"Department: {position.department}")
+    print(f"Description: {position.description}")
+    print(f"Shortlisted Students: {len(shortlist) if shortlist else 0}\n")
+
+@position_cli.command("delete", help="Delete a position")
+def delete_position_command():
+    print("\nPositions:\n")
+    positions = get_all_positions()
+    if not positions:
+        print("No positions available.\n")
+        return
+    
+    for pos in positions:
+        employer = get_employer_by_id(pos.employerID)
+        print(f"ID: {pos.id} | {pos.positionTitle} - {employer.companyName if employer else 'Unknown'}")
+    
+    pos_id = input("\nEnter position ID to delete: ")
+    position = get_position_by_id(pos_id)
+    
+    if not position:
+        print(f"\nPosition {pos_id} not found.\n")
+        return
+    
+    confirm = input(f"\nAre you sure you want to delete '{position.positionTitle}'? (y/n): ")
+    if confirm.lower() != 'y':
+        print("Deletion cancelled.\n")
+        return
+    
+    # Check if there are students in shortlist
+    shortlist = view_position_shortlist(pos_id)
+    if shortlist:
+        print(f"\nWarning: This position has {len(shortlist)} student(s) in the shortlist.")
+        confirm2 = input("Delete anyway? (y/n): ")
+        if confirm2.lower() != 'y':
+            print("Deletion cancelled.\n")
+            return
+    
+    # Delete associated student positions first
+    Student_Position.query.filter_by(positionID=pos_id).delete()
+    db.session.delete(position)
+    db.session.commit()
+    print(f"\nPosition '{position.positionTitle}' deleted successfully.\n")
+
+app.cli.add_command(position_cli)
 
 # '''
 # Test Commands
@@ -488,3 +652,4 @@ def employer_tests_command(type):
         return; 
 
 app.cli.add_command(test)
+

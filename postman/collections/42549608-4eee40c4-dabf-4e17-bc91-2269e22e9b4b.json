@@ -360,27 +360,6 @@
 			]
 		},
 		{
-			"name": "Get users",
-			"id": "42549608-ca3f1948-463e-455f-abd6-b33d26eee5b1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "List Users",
 			"event": [
 				{
@@ -979,9 +958,6 @@
 							"pm.collectionVariables.set(\"studentID\", studentID);\r",
 							"pm.collectionVariables.set(\"positionID\", positionID);\r",
 							"\r",
-							"// \"staffID\" : 14,\r",
-							"//     \"studentID\" : 15,\r",
-							"//     \"positionID\" : 4\r",
 							"\r",
 							"pm.test(\r",
 							"\t\"Should respond with student <studentID> shorlisted for position <positionID> by staff <staffID> created message\", \r",
@@ -1090,51 +1066,271 @@
 		},
 		{
 			"name": "View Employer Positions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab808f20-4ee3-4d2f-af86-4e1bf750c14a",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"department\": {\"type\":\"string\"},\r",
+							"        \"description\": { \"type\": \"string\" },\r",
+							"        \"employerID\": { \"type\": \"number\" }, \r",
+							"\t\t\"id\":{\"type\":\"number\"},\r",
+							"        \"positionTitle\":{\"type\":\"string\"},\r",
+							"        \"shortlist\": { \r",
+							"            \"type\": \"array\", \r",
+							"            \"items\": { \"type\": \"number\" }\r",
+							"        }\r",
+							"    },\r",
+							"      \"required\": [\"department\", \"description\", \"employerID\", \"id\", \"positionTitle\", \"shortlist\"]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer positions should have a department, description, employerID, id, positionTitle and shortlist with the appropriate values`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-521a76a2-efb4-43fd-805c-dd107bbe512b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-emp-pos/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-emp-pos",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "View Position Shortlist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eaaa203-2fb2-4872-9a37-b970191d64a2",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\" : {\"type\": \"string\"},\r",
+							"        \"positionID\" : {\"type\": \"integer\"},\r",
+							"        \"status\" : {\"type\": \"string\"},\r",
+							"        \"studentID\" : {\"type\": \"integer\"}\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Employer response for {positionID} by {studentID} is {employer_response}`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-09dacd0f-cc64-4e72-a2b1-be4ca020e3e1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-pos-sho/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-pos-sho",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Accept/Reject Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40e5da07-55f8-40f3-9fb6-394f24c1c0ee",
+						"exec": [
+							"let { employerID, positionID, studentID, status, msg} = JSON.parse(pm.request.body.raw);\r",
+							"\r",
+							"pm.collectionVariables.set(\"employerID\", employerID);\r",
+							"pm.collectionVariables.set(\"positionID\", positionID);\r",
+							"pm.collectionVariables.set(\"studentID\", studentID);\r",
+							"pm.collectionVariables.set(\"status\", status);\r",
+							"pm.collectionVariables.set(\"message\", msg);\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with student <studentID> has been <status> for position <positionID> by employer <employerID>\", \r",
+							"\tfunction () {\r",
+							"\t\tlet { message } = pm.response.json();\r",
+							"    \tpm.expect(message).to.eql(`Student ${studentID} has been ${status} for position ${positionID} by employer ${employerID}`);\r",
+							"\t}\r",
+							");\r",
+							"\r",
+							"pm.test(\r",
+							"\t\"Should respond with the correct status\", \r",
+							"\tfunction () {\r",
+							"\t\tpm.response.to.have.status(201);\r",
+							"\t}\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-5eaafa8c-834a-458e-9dad-210775c476f1",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employerID\": \"1\",\r\n    \"positionID\": \"1\",\r\n    \"studentID\": \"8\",\r\n    \"status\": \"accepted\",\r\n    \"msg\": \"Congrats\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/accept-reject",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"accept-reject"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "View Student Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a473726b-2bcf-4a5f-a5d1-d32e7a47971c",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"integer\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"integer\" }\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Student {{studentID}} has correct application data`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-d33a1185-5310-44e6-8b6a-e3829a08a1e2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-std-sho/{{studentID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-std-sho",
+						"{{studentID}}"
+					]
+				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "48db86cf-725c-4833-ba81-3a5741002827",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0e1d788e-b76e-4bc1-ae18-9af796681505",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
@@ -1192,6 +1388,14 @@
 		},
 		{
 			"key": "positionID",
+			"value": ""
+		},
+		{
+			"key": "status",
+			"value": ""
+		},
+		{
+			"key": "message",
 			"value": ""
 		}
 	]
