@@ -1237,13 +1237,58 @@
 		},
 		{
 			"name": "View Student Shortlists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a473726b-2bcf-4a5f-a5d1-d32e7a47971c",
+						"exec": [
+							"var schema = {\r",
+							"  \"type\": \"array\",\r",
+							"  \"items\": {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"employer_response\": { \"type\": \"string\" },\r",
+							"        \"positionID\": { \"type\": \"integer\" },\r",
+							"        \"status\": { \"type\": \"string\" },\r",
+							"        \"studentID\": { \"type\": \"integer\" }\r",
+							"    },\r",
+							"      \"required\": [\"employer_response\", \"positionID\", \"status\", \"studentID\"],\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.test(\r",
+							"    `Student {{studentID}} has correct application data`, \r",
+							"    function() {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"    }\r",
+							");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
 			"id": "42549608-d33a1185-5310-44e6-8b6a-e3829a08a1e2",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{host}}/view-std-sho/{{studentID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"view-std-sho",
+						"{{studentID}}"
+					]
+				}
 			},
 			"response": []
 		}
