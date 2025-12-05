@@ -577,61 +577,6 @@
 			"response": []
 		},
 		{
-			"name": "List Employers Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ce8dab7e-5b2e-4218-be5f-a75088e60a04",
-						"exec": [
-							"var schema = {\r",
-							"  \"type\": \"array\",\r",
-							"  \"items\": {\r",
-							"    \"type\": \"object\",\r",
-							"    \"properties\": {\r",
-							"        \"companyName\":{\"type\":\"string\"},\r",
-							"\t\t\"id\":{\"type\":\"number\"},\r",
-							"        \"username\":{\"type\":\"string\"}\r",
-							"    },\r",
-							"    \"required\": [ \"companyName\", \"id\", \"username\"]\r",
-							"  }\r",
-							"};\r",
-							"\r",
-							"\r",
-							"pm.test(\r",
-							"    `Employer should have an companyName, id and username with the appropriate values`, \r",
-							"    function() {\r",
-							"        var jsonData = pm.response.json();\r",
-							"        pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
-							"    }\r",
-							");"
-						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
-					}
-				}
-			],
-			"id": "42549608-e53a7d27-e598-4fc3-8094-761ffeba1e46",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/list-emp",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"list-emp"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Create Position",
 			"event": [
 				{
